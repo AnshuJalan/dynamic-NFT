@@ -2,7 +2,7 @@
 #                                Brute Structure
 #
 # Brute structure represents the most basic form of a dynamic NFT. It allows
-# an admin address to modify the token_metadata big_map directly through a
+# an admin address to directly modify the token_metadata big_map through a
 # dedicated entrypoint.
 #
 # This is useful when the metadata depends entirely on data stored on off-chain
@@ -32,6 +32,8 @@ class Brute(FA2_NFT.FA2_NFT):
                 token_info=sp.TMap(sp.TString, sp.TBytes),
             ),
         ),
+        # IPFS links hosts the metadata at ./metadata/brute.json
+        metadata=sp.utils.metadata_of_url("ipfs://QmTovUx5bbdZzAGwZaQpzqN5YwRACkCrv3ntNbP3CzostA"),
         **kwargs
     ):
         # Use the storage and entrypoints of the base FA2 NFT contract
@@ -39,6 +41,16 @@ class Brute(FA2_NFT.FA2_NFT):
 
         # Add a token_metadata big_map to the existing FA2 NFT storage
         self.update_initial_storage(token_metadata=token_metadata)
+
+        METADATA = {
+            "name": "dNFT Brute",
+            "version": "1.0.0",
+            "description": "dNFT (dynamic NFT) contract with Brute Structure",
+            "interfaces": ["TZIP-012", "TZIP-016"],
+        }
+
+        # Smartpy's helper to create the metadata json
+        self.init_metadata("metadata", METADATA)
 
     @sp.entry_point
     def update_token_metadata(self, params):
