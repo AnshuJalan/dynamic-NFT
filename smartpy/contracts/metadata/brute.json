@@ -1,6 +1,1 @@
-{
-  "name": "dNFT Brute",
-  "version": "1.0.0",
-  "description": "dNFT (dynamic NFT) contract with Brute Structure",
-  "interfaces": ["TZIP-012", "TZIP-016"]
-}
+{ "name": "dNFT Brute", "version": "1.0.0", "description": "dNFT (dynamic NFT) contract with Brute Structure", "interfaces": [ "TZIP-012", "TZIP-016" ] }

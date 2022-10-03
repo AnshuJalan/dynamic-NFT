@@ -1,17 +1,20 @@
-#################################################################################
-#                                 Point Structure
+##################################################################################
+#                                Create Structure
 #
-# Point structure allows more naturally dynamic token metadata through an
-# off-chain view that dynamically creates an external metadata URI (that points
-# to a TZIP-21 json) using values from the contract's storage.
+# Create structure allows for more naturally dynamic token metadata similar to
+# Point, but instead of building an external link to a TZIP-21 Json, it builds
+# and serves the JSON through an off-chain view.
 #
-# It's useful when the metadata depends on some properties (of the entity
-# behind the token) stored in the contract's storage.
+# It is useful when most of the fields in the metadata JSON are static or the
+# off-chain datastore needs to be simplified. For instance, if a token has fixed
+# 'symbol' and 'decimals' and a static thumbnailUri, only fields like artifactUri
+# and displayUri need to be dynamically generated. These may be an external link
+# or an SVG (as shown in SVG Structure).
 #
-# The liveness of the external server on which the metadata is hosted must be
+# The liveness of the external server on which the artifact is hosted must be
 # ensured. A decentralised storage service like IPFS is recommended. Moreover,
 # the URIs generated in the off-chain view must be verified.
-#################################################################################
+##################################################################################
 
 import smartpy as sp
 
@@ -28,7 +31,7 @@ class Types:
     STATE = sp.TRecord(prop_1=sp.TNat, prop_2=sp.TNat)
 
 
-class Point(FA2_NFT.FA2_NFT):
+class Create(FA2_NFT.FA2_NFT):
     def __init__(
         self,
         # A mapping from token_id to the state of an NFT
@@ -37,8 +40,8 @@ class Point(FA2_NFT.FA2_NFT):
             tkey=sp.TNat,
             tvalue=Types.STATE,
         ),
-        # IPFS links hosts the metadata at ./metadata/point.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmU69Krzk3f872kCk6WLdaftyUYA1CPwa1Wx2sVRDfPSGe"),
+        # IPFS links hosts the metadata at ./metadata/create.json
+        metadata=sp.utils.metadata_of_url("ipfs://QmPNzNSNog6N5C7TbBKN421bmw1nJCktJhDhJEsdksoaH1"),
         **kwargs
     ):
         # Use the storage and entrypoints of the base FA2 NFT contract
@@ -48,9 +51,9 @@ class Point(FA2_NFT.FA2_NFT):
         self.update_initial_storage(states=states, metadata=metadata)
 
         METADATA = {
-            "name": "dNFT Point",
+            "name": "dNFT Create",
             "version": "1.0.0",
-            "description": "dNFT (dynamic NFT) contract with Point Structure",
+            "description": "dNFT (dynamic NFT) contract with Create Structure",
             "interfaces": ["TZIP-012", "TZIP-016", "TZIP-021"],
             "views": [self.token_metadata],
         }
@@ -94,19 +97,30 @@ class Point(FA2_NFT.FA2_NFT):
 
         slash = sp.utils.bytes_of_string("/")
 
-        # Construct the metadata uri in bytes form
+        png = sp.utils.bytes_of_string(".png")
+
+        # Construct the artifact/display image uri in bytes form
         # NOTE: This is a sample construction. The form your may url take depends entirely
         #       upon how your artifacts are hosted.
-        metadata_url = sp.utils.bytes_of_string("https://metadata_url.com")
-        metadata_uri = metadata_url + slash + prop_1 + slash + prop_2 + slash + b_token_id
+        image_url = sp.utils.bytes_of_string("https://image_url.com")
+        image_uri = image_url + slash + prop_1 + slash + prop_2 + slash + b_token_id + png
+
+        # Create a TZIP-21 compliant token-info
+        metadata_tzip_21 = {
+            "name": sp.utils.bytes_of_string("dNFT Create"),
+            "symbol": sp.utils.bytes_of_string("dNFTC"),
+            "decimals": sp.utils.bytes_of_string("0"),
+            "thumbnailUri": sp.utils.bytes_of_string("https://image_url.com/thumbnail.png"),  # Dummy link
+            # Dynamic fields
+            "artifactUri": image_uri,
+            "displayUri": image_uri,
+        }
 
         # Return the TZIP-16 compliant metadata
         sp.result(
             sp.record(
                 token_id=token_id,
-                token_info={
-                    "": metadata_uri,
-                },
+                token_info=metadata_tzip_21,
             )
         )
 
@@ -122,7 +136,7 @@ if __name__ == "__main__":
         scenario = sp.test_scenario()
 
         # Insert an arbitrary token-id and state
-        point_fa2 = Point(
+        create_fa2 = Create(
             tokens=sp.big_map(
                 l={
                     21: sp.unit,
@@ -134,24 +148,28 @@ if __name__ == "__main__":
                 },
             ),
         )
-        scenario += point_fa2
+        scenario += create_fa2
 
-        # Bytes value represents https://metadata_url.com/0/1/21
         expected_metadata = sp.record(
             token_id=21,
             token_info={
-                "": sp.bytes("0x68747470733a2f2f6d657461646174615f75726c2e636f6d2f302f312f3231"),
+                "name": sp.bytes("0x644e465420437265617465"),
+                "symbol": sp.bytes("0x644e465443"),
+                "decimals": sp.bytes("0x30"),
+                "thumbnailUri": sp.bytes("0x68747470733a2f2f696d6167655f75726c2e636f6d2f7468756d626e61696c2e706e67"),
+                "artifactUri": sp.bytes("0x68747470733a2f2f696d6167655f75726c2e636f6d2f302f312f32312e706e67"),
+                "displayUri": sp.bytes("0x68747470733a2f2f696d6167655f75726c2e636f6d2f302f312f32312e706e67"),
             },
         )
 
-        scenario.verify_equal(point_fa2.token_metadata(21), expected_metadata)
+        scenario.verify_equal(create_fa2.token_metadata(21), expected_metadata)
 
     @sp.add_test(name="change_state - updates the state of a token")
     def test():
         scenario = sp.test_scenario()
 
         # Insert an arbitrary token-id and state
-        point = Point(
+        create = Create(
             tokens=sp.big_map(
                 l={
                     21: sp.unit,
@@ -163,17 +181,17 @@ if __name__ == "__main__":
                 },
             ),
         )
-        scenario += point
+        scenario += create
 
         new_state = sp.record(prop_1=5, prop_2=10)
 
         # Call change_state on token 21 and assign a new state
-        scenario += point.change_state(
+        scenario += create.change_state(
             token_id=21,
             state=new_state,
         )
 
         # State is updated correctly
-        scenario.verify(point.data.states[21] == new_state)
+        scenario.verify(create.data.states[21] == new_state)
 
-    sp.add_compilation_target("point", Point())
+    sp.add_compilation_target("create", Create())

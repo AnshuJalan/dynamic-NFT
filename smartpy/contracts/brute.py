@@ -5,7 +5,7 @@
 # an admin address to directly modify the token_metadata big_map through a
 # dedicated entrypoint.
 #
-# This is useful when the metadata depends entirely on data stored on off-chain
+# It's useful when the metadata depends entirely on data stored on off-chain
 # servers or its generation requires extensive computation that is not possible
 # on-chain.
 #
