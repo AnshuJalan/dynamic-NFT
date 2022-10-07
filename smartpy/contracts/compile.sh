@@ -19,7 +19,7 @@ COMP_DIR=./michelson
 META_DIR=./metadata
 
 # Array of files to compile.
-CONTRACTS_ARRAY=(brute point create svg)
+CONTRACTS_ARRAY=(brute point create svg oracle)
 
 # Ensure we have a SmartPy binary.
 if [ ! -f "$SMART_PY_CLI" ]; then

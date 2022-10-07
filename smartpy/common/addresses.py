@@ -6,3 +6,4 @@ JOHN = sp.test_account("john").address
 MIKE = sp.test_account("mike").address
 
 ADMIN = sp.test_account("admin").address
+ORACLE = sp.test_account("oracle").address
