@@ -35,7 +35,7 @@ class SVG(FA2_NFT.FA2_NFT):
             tvalue=Types.STATE,
         ),
         # IPFS links hosts the metadata at ./metadata/svg.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmcZVXetNzjGKzR94SUsZ7yHJjZ8vvyLgGwzXAcrYGtJpX"),
+        metadata=sp.utils.metadata_of_url("ipfs://QmPiE7wJCCKvUxTaEZCDUBnG6PJqYoqxkRDcsGqCpRmVxV"),
         **kwargs
     ):
         # Use the storage and entrypoints of the base FA2 NFT contract

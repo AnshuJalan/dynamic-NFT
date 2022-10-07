@@ -41,7 +41,7 @@ class Create(FA2_NFT.FA2_NFT):
             tvalue=Types.STATE,
         ),
         # IPFS links hosts the metadata at ./metadata/create.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmPNzNSNog6N5C7TbBKN421bmw1nJCktJhDhJEsdksoaH1"),
+        metadata=sp.utils.metadata_of_url("ipfs://QmbWG4Qoqg4p6HkK2jYdG9Dyyww6Bqc6zUaUwNsGTDQWFN"),
         **kwargs
     ):
         # Use the storage and entrypoints of the base FA2 NFT contract
