@@ -19,7 +19,7 @@ COMP_DIR=./michelson
 META_DIR=./metadata
 
 # Array of files to compile.
-CONTRACTS_ARRAY=(game1)
+CONTRACTS_ARRAY=(game1 game2)
 
 # Ensure we have a SmartPy binary.
 if [ ! -f "$SMART_PY_CLI" ]; then
@@ -46,7 +46,7 @@ function processContract {
 
     # Test
     echo ">>> [1 / 3] Testing ${CONTRACT_NAME} "
-    $SMART_PY_CLI test $CONTRACT_IN $OUT_DIR
+    $SMART_PY_CLI test $CONTRACT_IN $OUT_DIR --html
     echo ">>> Done"
 
     echo ">>> [2 / 3] Compiling ${CONTRACT_NAME}"
