@@ -40,7 +40,7 @@ class Game(FA2_NFT.FA2_NFT):
             tkey=sp.TNat,
             tvalue=Types.PLAYER_STATE,
         ),
-        # IPFS links hosts the metadata at ./metadata/game1.json
+        # IPFS links hosts the metadata at ./metadata/game2.json
         metadata=sp.utils.metadata_of_url("ipfs://QmU69Krzk3f872kCk6WLdaftyUYA1CPwa1Wx2sVRDfPSGe"),
         **kwargs
     ):

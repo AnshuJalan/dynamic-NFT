@@ -19,7 +19,7 @@ COMP_DIR=./michelson
 META_DIR=./metadata
 
 # Array of files to compile.
-CONTRACTS_ARRAY=(game1 game2)
+CONTRACTS_ARRAY=(game1 game2 locker)
 
 # Ensure we have a SmartPy binary.
 if [ ! -f "$SMART_PY_CLI" ]; then

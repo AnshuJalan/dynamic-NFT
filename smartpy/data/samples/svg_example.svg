@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="110.49609mm"
+   height="110.49609mm"
+   viewBox="0 0 110.49609 110.49609"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c8708, 2021-01-15)"
+   sodipodi:docname="drawing.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.87179538"
+     inkscape:cx="221.9646"
+     inkscape:cy="228.24343"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1536"
+     inkscape:window-height="835"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(629.68164,50.817978)">
+    <rect
+       style="fill:#0066ff;stroke:#d5f6ff;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect833"
+       width="110.49609"
+       height="110.49609"
+       x="-629.68164"
+       y="-50.817978" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.4183px;line-height:1.25;font-family:'Noto Sans Myanmar';-inkscape-font-specification:'Noto Sans Myanmar';stroke-width:0.360457"
+       x="-604.23468"
+       y="3.6797066"
+       id="text1460"><tspan
+         sodipodi:role="line"
+         id="tspan1458"
+         x="-604.23468"
+         y="3.6797066"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;stroke-width:0.360457">35.0 XTZ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:7.71334px;line-height:1.25;font-family:'Noto Sans Myanmar';-inkscape-font-specification:'Noto Sans Myanmar';stroke-width:0.192833"
+       x="-587.25775"
+       y="14.748915"
+       id="text1464"><tspan
+         sodipodi:role="line"
+         id="tspan1462"
+         x="-587.25775"
+         y="14.748915"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;stroke-width:0.192833">$ 52.50</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.222px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke:#ffffff;stroke-width:0.15555"
+       x="-584.98944"
+       y="-43.357834"
+       id="text1474"><tspan
+         sodipodi:role="line"
+         id="tspan1472"
+         x="-584.98944"
+         y="-43.357834"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke:#ffffff;stroke-width:0.15555">Lock 21</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.222px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke:#ffffff;stroke-width:0.15555"
+       x="-584.98944"
+       y="56.106731"
+       id="text1474-5"><tspan
+         sodipodi:role="line"
+         id="tspan1472-0"
+         x="-584.98944"
+         y="56.106731"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke:#ffffff;stroke-width:0.15555">Lock 21</tspan></text>
+  </g>
+</svg>

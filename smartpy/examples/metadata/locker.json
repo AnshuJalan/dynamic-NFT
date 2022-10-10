@@ -1,0 +1,403 @@
+{
+  "name": "dNFT Locker",
+  "version": "1.0.0",
+  "description": "Tokenised XTZ locker based on Oracle and SVG Structure",
+  "interfaces": [ "TZIP-012", "TZIP-016", "TZIP-021" ],
+  "views": [
+    {
+      "name": "token_metadata",
+      "pure": false,
+      "implementations": [
+        {
+          "michelsonStorageView": {
+            "parameter": { "prim": "nat" },
+            "returnType": {
+              "prim": "pair",
+              "args": [ { "prim": "nat", "annots": [ "%token_id" ] }, { "prim": "map", "args": [ { "prim": "string" }, { "prim": "bytes" } ], "annots": [ "%token_info" ] } ]
+            },
+            "code": [
+              { "prim": "UNPAIR" },
+              { "prim": "SWAP" },
+              { "prim": "DUP" },
+              { "prim": "DUG", "args": [ { "int": "2" } ] },
+              { "prim": "GET", "args": [ { "int": "3" } ] },
+              { "prim": "CAR" },
+              { "prim": "SWAP" },
+              { "prim": "DUP" },
+              { "prim": "DUG", "args": [ { "int": "2" } ] },
+              { "prim": "GET" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "mutez" }, { "int": "0" } ] } ], [] ] },
+              { "prim": "DUP" },
+              { "prim": "PUSH", "args": [ { "prim": "mutez" }, { "int": "0" } ] },
+              { "prim": "COMPARE" },
+              { "prim": "LT" },
+              { "prim": "IF", "args": [ [], [ { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "FA2_TOKEN_UNDEFINED" } ] }, { "prim": "FAILWITH" } ] ] },
+              {
+                "prim": "LAMBDA",
+                "args": [
+                  { "prim": "nat" },
+                  { "prim": "bytes" },
+                  [
+                    {
+                      "prim": "PUSH",
+                      "args": [
+                        { "prim": "map", "args": [ { "prim": "nat" }, { "prim": "bytes" } ] },
+                        [
+                          { "prim": "Elt", "args": [ { "int": "0" }, { "bytes": "30" } ] },
+                          { "prim": "Elt", "args": [ { "int": "1" }, { "bytes": "31" } ] },
+                          { "prim": "Elt", "args": [ { "int": "2" }, { "bytes": "32" } ] },
+                          { "prim": "Elt", "args": [ { "int": "3" }, { "bytes": "33" } ] },
+                          { "prim": "Elt", "args": [ { "int": "4" }, { "bytes": "34" } ] },
+                          { "prim": "Elt", "args": [ { "int": "5" }, { "bytes": "35" } ] },
+                          { "prim": "Elt", "args": [ { "int": "6" }, { "bytes": "36" } ] },
+                          { "prim": "Elt", "args": [ { "int": "7" }, { "bytes": "37" } ] },
+                          { "prim": "Elt", "args": [ { "int": "8" }, { "bytes": "38" } ] },
+                          { "prim": "Elt", "args": [ { "int": "9" }, { "bytes": "39" } ] }
+                        ]
+                      ]
+                    },
+                    { "prim": "DUP" },
+                    { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "10" } ] },
+                    { "prim": "DUP", "args": [ { "int": "4" } ] },
+                    { "prim": "EDIV" },
+                    { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "26" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CDR" } ] ] },
+                    { "prim": "GET" },
+                    { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "26" } ] }, { "prim": "FAILWITH" } ], [] ] },
+                    { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "10" } ] },
+                    { "prim": "DUP", "args": [ { "int": "4" } ] },
+                    { "prim": "EDIV" },
+                    { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "27" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+                    { "prim": "DUP" },
+                    { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "0" } ] },
+                    { "prim": "COMPARE" },
+                    { "prim": "LT" },
+                    {
+                      "prim": "LOOP",
+                      "args": [
+                        [
+                          { "prim": "SWAP" },
+                          { "prim": "DUP", "args": [ { "int": "3" } ] },
+                          { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "10" } ] },
+                          { "prim": "DUP", "args": [ { "int": "4" } ] },
+                          { "prim": "EDIV" },
+                          { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "30" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CDR" } ] ] },
+                          { "prim": "GET" },
+                          { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "30" } ] }, { "prim": "FAILWITH" } ], [] ] },
+                          { "prim": "CONCAT" },
+                          { "prim": "SWAP" },
+                          { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "10" } ] },
+                          { "prim": "SWAP" },
+                          { "prim": "EDIV" },
+                          { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "31" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+                          { "prim": "DUP" },
+                          { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "0" } ] },
+                          { "prim": "COMPARE" },
+                          { "prim": "LT" }
+                        ]
+                      ]
+                    },
+                    { "prim": "DROP" },
+                    { "prim": "SWAP" },
+                    { "prim": "DROP" },
+                    { "prim": "SWAP" },
+                    { "prim": "DROP" }
+                  ]
+                ]
+              },
+              { "prim": "PUSH", "args": [ { "prim": "mutez" }, { "int": "1" } ] },
+              { "prim": "DIG", "args": [ { "int": "2" } ] },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "UNIT" }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "CAR" },
+              { "prim": "DUP" },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "SWAP" },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "119" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "map", "args": [ { "prim": "string" }, { "prim": "bytes" } ] },
+                  [
+                    { "prim": "Elt", "args": [ { "string": "decimals" }, { "bytes": "30" } ] },
+                    { "prim": "Elt", "args": [ { "string": "name" }, { "bytes": "4c6f636b657220644e4654" } ] },
+                    { "prim": "Elt", "args": [ { "string": "symbol" }, { "bytes": "4c4f434b" } ] },
+                    { "prim": "Elt", "args": [ { "string": "thumbnailUri" }, { "bytes": "68747470733a2f2f696d6167655f75726c2e636f6d2f7468756d626e61696c2e706e67" } ] }
+                  ]
+                ]
+              },
+              { "prim": "PUSH", "args": [ { "prim": "bytes" }, { "bytes": "2533632f747370616e2533652533632f746578742533652533632f672533652533632f737667253365" } ] },
+              { "prim": "DUP", "args": [ { "int": "5" } ] },
+              { "prim": "DUP", "args": [ { "int": "7" } ] },
+              { "prim": "EXEC" },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "bytes" },
+                  {
+                    "bytes":
+                      "2533632f747370616e2533652533632f746578742533652533637465787420783d272d3538342e39383934342720793d2735362e313036373331272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c2720666f6e742d73697a653d27362e323232707827207374726f6b653d2725323366666666666627207374726f6b652d77696474683d272e313535353527207374796c653d276c696e652d6865696768743a312e32352720786d6c3a73706163653d27707265736572766527253365253363747370616e20783d272d3538342e39383934342720793d2735362e313036373331272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c27207374726f6b653d2725323366666666666627207374726f6b652d77696474683d272e3135353535272533654c6f636b20"
+                  }
+                ]
+              },
+              { "prim": "DUP", "args": [ { "int": "7" } ] },
+              { "prim": "DUP", "args": [ { "int": "9" } ] },
+              { "prim": "EXEC" },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "bytes" },
+                  {
+                    "bytes":
+                      "2533632f747370616e2533652533632f746578742533652533637465787420783d272d3538342e39383934342720793d272d34332e333537383334272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c2720666f6e742d73697a653d27362e323232707827207374726f6b653d2725323366666666666627207374726f6b652d77696474683d272e313535353527207374796c653d276c696e652d6865696768743a312e32352720786d6c3a73706163653d27707265736572766527253365253363747370616e20783d272d3538342e39383934342720793d272d34332e333537383334272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c27207374726f6b653d2725323366666666666627207374726f6b652d77696474683d272e3135353535272533654c6f636b20"
+                  }
+                ]
+              },
+              { "prim": "DUP", "args": [ { "int": "9" } ] },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "10000" } ] },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "DUP" },
+              { "prim": "DUP" },
+              { "prim": "DUP", "args": [ { "int": "13" } ] },
+              { "prim": "DUP", "args": [ { "int": "17" } ] },
+              { "prim": "CAR" },
+              { "prim": "CAR" },
+              { "prim": "CDR" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "XTZ-USD" } ] },
+              { "prim": "VIEW", "args": [ { "string": "getPrice" }, { "prim": "pair", "args": [ { "prim": "timestamp" }, { "prim": "nat" } ] } ] },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "INVALID_VIEW" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "CDR" },
+              { "prim": "MUL" },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "134" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "135" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "MUL" },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "DUP", "args": [ { "int": "12" } ] },
+              { "prim": "DUP", "args": [ { "int": "16" } ] },
+              { "prim": "CAR" },
+              { "prim": "CAR" },
+              { "prim": "CDR" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "XTZ-USD" } ] },
+              { "prim": "VIEW", "args": [ { "string": "getPrice" }, { "prim": "pair", "args": [ { "prim": "timestamp" }, { "prim": "nat" } ] } ] },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "INVALID_VIEW" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "CDR" },
+              { "prim": "MUL" },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "134" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "SUB" },
+              { "prim": "ISNAT" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "136" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "136" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "EXEC" },
+              { "prim": "PUSH", "args": [ { "prim": "bytes" }, { "bytes": "2e" } ] },
+              { "prim": "DUP", "args": [ { "int": "11" } ] },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "DUP" },
+              { "prim": "DUP", "args": [ { "int": "13" } ] },
+              { "prim": "DUP", "args": [ { "int": "17" } ] },
+              { "prim": "CAR" },
+              { "prim": "CAR" },
+              { "prim": "CDR" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "XTZ-USD" } ] },
+              { "prim": "VIEW", "args": [ { "string": "getPrice" }, { "prim": "pair", "args": [ { "prim": "timestamp" }, { "prim": "nat" } ] } ] },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "INVALID_VIEW" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "CDR" },
+              { "prim": "MUL" },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "134" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "135" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "EXEC" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "bytes" },
+                  {
+                    "bytes":
+                      "2058545a2533632f747370616e2533652533632f746578742533652533637465787420783d272d3538372e32353737352720793d2731342e3734383931352720666f6e742d66616d696c793d27274e6f746f2053616e73204d79616e6d6172272720666f6e742d73697a653d27372e37313333707827207374726f6b652d77696474683d272e313932383327207374796c653d276c696e652d6865696768743a312e32352720786d6c3a73706163653d27707265736572766527253365253363747370616e20783d272d3538372e32353737352720793d2731342e373438393135272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c27207374726f6b652d77696474683d272e3139323833272533652420"
+                  }
+                ]
+              },
+              { "prim": "DUP", "args": [ { "int": "11" } ] },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "DUP", "args": [ { "int": "11" } ] },
+              { "prim": "MUL" },
+              { "prim": "DUP", "args": [ { "int": "12" } ] },
+              { "prim": "SUB" },
+              { "prim": "ISNAT" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "120" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "EXEC" },
+              { "prim": "PUSH", "args": [ { "prim": "bytes" }, { "bytes": "2e" } ] },
+              { "prim": "DUP", "args": [ { "int": "13" } ] },
+              { "prim": "DUP", "args": [ { "int": "12" } ] },
+              { "prim": "EXEC" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "bytes" },
+                  {
+                    "bytes":
+                      "646174613a696d6167652f7376672b786d6c3b636861727365743d5554462d382c2533633f786d6c2076657273696f6e3d27312e302720656e636f64696e673d275554462d38273f2533652533637376672077696474683d273131302e356d6d27206865696768743d273131302e356d6d272076657273696f6e3d27312e31272076696577426f783d27302030203131302e35203131302e352720786d6c6e733d27687474703a2f2f7777772e77332e6f72672f323030302f7376672720786d6c6e733a63633d27687474703a2f2f6372656174697665636f6d6d6f6e732e6f72672f6e732532332720786d6c6e733a64633d27687474703a2f2f7075726c2e6f72672f64632f656c656d656e74732f312e312f2720786d6c6e733a7264663d27687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e73253233272533652533636d657461646174612533652533637264663a52444625336525336363633a576f726b207264663a61626f75743d272725336525336364633a666f726d6174253365696d6167652f7376672b786d6c2533632f64633a666f726d617425336525336364633a74797065207264663a7265736f757263653d27687474703a2f2f7075726c2e6f72672f64632f64636d69747970652f5374696c6c496d616765272f25336525336364633a7469746c652f2533652533632f63633a576f726b2533652533632f7264663a5244462533652533632f6d6574616461746125336525336367207472616e73666f726d3d277472616e736c617465283632392e36382035302e38313829272533652533637265637420783d272d3632392e36382720793d272d35302e383138272077696474683d273131302e3527206865696768743d273131302e35272066696c6c3d2725323330366627207374726f6b652d77696474683d2730272f2533652533637465787420783d272d3630342e32333436382720793d27332e363739373036362720666f6e742d66616d696c793d27274e6f746f2053616e73204d79616e6d6172272720666f6e742d73697a653d2731342e343138707827207374726f6b652d77696474683d272e333630343627207374796c653d276c696e652d6865696768743a312e32352720786d6c3a73706163653d27707265736572766527253365253363747370616e20783d272d3630342e32333436382720793d27332e36373937303636272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c2720666f6e742d7765696768743d27626f6c6427207374726f6b652d77696474683d272e333630343627253365"
+                  }
+                ]
+              },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "SOME" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "artifactUri" } ] },
+              { "prim": "UPDATE" },
+              { "prim": "PUSH", "args": [ { "prim": "bytes" }, { "bytes": "2533632f747370616e2533652533632f746578742533652533632f672533652533632f737667253365" } ] },
+              { "prim": "DUP", "args": [ { "int": "5" } ] },
+              { "prim": "DUP", "args": [ { "int": "7" } ] },
+              { "prim": "EXEC" },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "bytes" },
+                  {
+                    "bytes":
+                      "2533632f747370616e2533652533632f746578742533652533637465787420783d272d3538342e39383934342720793d2735362e313036373331272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c2720666f6e742d73697a653d27362e323232707827207374726f6b653d2725323366666666666627207374726f6b652d77696474683d272e313535353527207374796c653d276c696e652d6865696768743a312e32352720786d6c3a73706163653d27707265736572766527253365253363747370616e20783d272d3538342e39383934342720793d2735362e313036373331272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c27207374726f6b653d2725323366666666666627207374726f6b652d77696474683d272e3135353535272533654c6f636b20"
+                  }
+                ]
+              },
+              { "prim": "DUP", "args": [ { "int": "7" } ] },
+              { "prim": "DUP", "args": [ { "int": "9" } ] },
+              { "prim": "EXEC" },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "bytes" },
+                  {
+                    "bytes":
+                      "2533632f747370616e2533652533632f746578742533652533637465787420783d272d3538342e39383934342720793d272d34332e333537383334272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c2720666f6e742d73697a653d27362e323232707827207374726f6b653d2725323366666666666627207374726f6b652d77696474683d272e313535353527207374796c653d276c696e652d6865696768743a312e32352720786d6c3a73706163653d27707265736572766527253365253363747370616e20783d272d3538342e39383934342720793d272d34332e333537383334272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c27207374726f6b653d2725323366666666666627207374726f6b652d77696474683d272e3135353535272533654c6f636b20"
+                  }
+                ]
+              },
+              { "prim": "DUP", "args": [ { "int": "9" } ] },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "10000" } ] },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "DUP" },
+              { "prim": "DUP" },
+              { "prim": "DUP", "args": [ { "int": "13" } ] },
+              { "prim": "DUP", "args": [ { "int": "17" } ] },
+              { "prim": "CAR" },
+              { "prim": "CAR" },
+              { "prim": "CDR" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "XTZ-USD" } ] },
+              { "prim": "VIEW", "args": [ { "string": "getPrice" }, { "prim": "pair", "args": [ { "prim": "timestamp" }, { "prim": "nat" } ] } ] },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "INVALID_VIEW" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "CDR" },
+              { "prim": "MUL" },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "134" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "135" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "MUL" },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "DUP", "args": [ { "int": "12" } ] },
+              { "prim": "DUP", "args": [ { "int": "16" } ] },
+              { "prim": "CAR" },
+              { "prim": "CAR" },
+              { "prim": "CDR" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "XTZ-USD" } ] },
+              { "prim": "VIEW", "args": [ { "string": "getPrice" }, { "prim": "pair", "args": [ { "prim": "timestamp" }, { "prim": "nat" } ] } ] },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "INVALID_VIEW" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "CDR" },
+              { "prim": "MUL" },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "134" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "SUB" },
+              { "prim": "ISNAT" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "136" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "136" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "EXEC" },
+              { "prim": "PUSH", "args": [ { "prim": "bytes" }, { "bytes": "2e" } ] },
+              { "prim": "DUP", "args": [ { "int": "11" } ] },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "DUP" },
+              { "prim": "DUP", "args": [ { "int": "13" } ] },
+              { "prim": "DIG", "args": [ { "int": "16" } ] },
+              { "prim": "CAR" },
+              { "prim": "CAR" },
+              { "prim": "CDR" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "XTZ-USD" } ] },
+              { "prim": "VIEW", "args": [ { "string": "getPrice" }, { "prim": "pair", "args": [ { "prim": "timestamp" }, { "prim": "nat" } ] } ] },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "INVALID_VIEW" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "CDR" },
+              { "prim": "MUL" },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "134" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "EDIV" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "135" } ] }, { "prim": "FAILWITH" } ], [ { "prim": "CAR" } ] ] },
+              { "prim": "EXEC" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "bytes" },
+                  {
+                    "bytes":
+                      "2058545a2533632f747370616e2533652533632f746578742533652533637465787420783d272d3538372e32353737352720793d2731342e3734383931352720666f6e742d66616d696c793d27274e6f746f2053616e73204d79616e6d6172272720666f6e742d73697a653d27372e37313333707827207374726f6b652d77696474683d272e313932383327207374796c653d276c696e652d6865696768743a312e32352720786d6c3a73706163653d27707265736572766527253365253363747370616e20783d272d3538372e32353737352720793d2731342e373438393135272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c27207374726f6b652d77696474683d272e3139323833272533652420"
+                  }
+                ]
+              },
+              { "prim": "DUP", "args": [ { "int": "11" } ] },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "1000000" } ] },
+              { "prim": "DUP", "args": [ { "int": "11" } ] },
+              { "prim": "MUL" },
+              { "prim": "DIG", "args": [ { "int": "11" } ] },
+              { "prim": "SUB" },
+              { "prim": "ISNAT" },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "120" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "EXEC" },
+              { "prim": "PUSH", "args": [ { "prim": "bytes" }, { "bytes": "2e" } ] },
+              { "prim": "DIG", "args": [ { "int": "11" } ] },
+              { "prim": "DIG", "args": [ { "int": "11" } ] },
+              { "prim": "EXEC" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              {
+                "prim": "PUSH",
+                "args": [
+                  { "prim": "bytes" },
+                  {
+                    "bytes":
+                      "646174613a696d6167652f7376672b786d6c3b636861727365743d5554462d382c2533633f786d6c2076657273696f6e3d27312e302720656e636f64696e673d275554462d38273f2533652533637376672077696474683d273131302e356d6d27206865696768743d273131302e356d6d272076657273696f6e3d27312e31272076696577426f783d27302030203131302e35203131302e352720786d6c6e733d27687474703a2f2f7777772e77332e6f72672f323030302f7376672720786d6c6e733a63633d27687474703a2f2f6372656174697665636f6d6d6f6e732e6f72672f6e732532332720786d6c6e733a64633d27687474703a2f2f7075726c2e6f72672f64632f656c656d656e74732f312e312f2720786d6c6e733a7264663d27687474703a2f2f7777772e77332e6f72672f313939392f30322f32322d7264662d73796e7461782d6e73253233272533652533636d657461646174612533652533637264663a52444625336525336363633a576f726b207264663a61626f75743d272725336525336364633a666f726d6174253365696d6167652f7376672b786d6c2533632f64633a666f726d617425336525336364633a74797065207264663a7265736f757263653d27687474703a2f2f7075726c2e6f72672f64632f64636d69747970652f5374696c6c496d616765272f25336525336364633a7469746c652f2533652533632f63633a576f726b2533652533632f7264663a5244462533652533632f6d6574616461746125336525336367207472616e73666f726d3d277472616e736c617465283632392e36382035302e38313829272533652533637265637420783d272d3632392e36382720793d272d35302e383138272077696474683d273131302e3527206865696768743d273131302e35272066696c6c3d2725323330366627207374726f6b652d77696474683d2730272f2533652533637465787420783d272d3630342e32333436382720793d27332e363739373036362720666f6e742d66616d696c793d27274e6f746f2053616e73204d79616e6d6172272720666f6e742d73697a653d2731342e343138707827207374726f6b652d77696474683d272e333630343627207374796c653d276c696e652d6865696768743a312e32352720786d6c3a73706163653d27707265736572766527253365253363747370616e20783d272d3630342e32333436382720793d27332e36373937303636272066696c6c3d272532336666666666662720666f6e742d66616d696c793d27417269616c2720666f6e742d7765696768743d27626f6c6427207374726f6b652d77696474683d272e333630343627253365"
+                  }
+                ]
+              },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "CONCAT" },
+              { "prim": "SOME" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "displayUri" } ] },
+              { "prim": "UPDATE" },
+              { "prim": "SWAP" },
+              { "prim": "PAIR" }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
