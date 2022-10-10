@@ -82,11 +82,11 @@ class Create(FA2_NFT.FA2_NFT):
     def token_metadata(self, token_id):
         sp.set_type(token_id, sp.TNat)
 
-        # Fetch the current state of the entity behind the token-id
-        state = sp.compute(self.data.states[token_id])
-
         # Verify that token id exist
         sp.verify(self.data.tokens.contains(token_id), FA2_NFT.FA2_Errors.FA2_TOKEN_UNDEFINED)
+
+        # Fetch the current state of the entity behind the token-id
+        state = sp.compute(self.data.states[token_id])
 
         bytes_of_nat = sp.compute(Utils.bytes_of_nat)
 

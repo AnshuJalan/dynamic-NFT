@@ -61,9 +61,9 @@ class Oracle(FA2_NFT.FA2_NFT):
         sp.verify(self.data.tokens.contains(token_id), FA2_NFT.FA2_Errors.FA2_TOKEN_UNDEFINED)
 
         # Fetch the current state of the entity behind the token-id through the oracle
-        # NOTE: The semantics of this call is utility dependent. You may fetch entire TZIP-21
-        #       fields from the oracle, or fetch 'states' and build the the metadata as shown
-        #       in this structure
+        # NOTE: The semantics of this call is utility dependent. You may fetch all TZIP-21
+        #       fields from the oracle and/or some co-related state and build the metadata
+        #       as shown in this structure
         state = sp.view(
             "get_state",
             self.data.oracle_address,
