@@ -44,7 +44,7 @@ class Game(FA2_NFT.FA2_NFT):
             tvalue=Types.PLAYER_STATE,
         ),
         # IPFS links hosts the metadata at ./metadata/game1.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmU69Krzk3f872kCk6WLdaftyUYA1CPwa1Wx2sVRDfPSGe"),
+        metadata=sp.utils.metadata_of_url("ipfs://QmP8oAmYqw2jFrwFzsyoT7hgwJRae8qL4NC4hfQQ1z2Y33"),
         **kwargs
     ):
         # Use the storage and entrypoints of the base FA2 NFT contract
