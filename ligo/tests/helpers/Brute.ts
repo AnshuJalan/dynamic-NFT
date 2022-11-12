@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { DefaultContractType, TransactionOperation } from "@taquito/taquito";
 
 import Tezos from "./Tezos";
-import { MintParams, UpdateTokenMetadataParams } from "../types";
+import { BruteMintParams, UpdateTokenMetadataParams } from "../types";
 
 export default class Brute {
   private _instance: DefaultContractType;
@@ -28,7 +28,7 @@ export default class Brute {
     }
   }
 
-  async mint(params: MintParams): Promise<TransactionOperation> {
+  async mint(params: BruteMintParams): Promise<TransactionOperation> {
     try {
       const op = await this._instance.methodsObject.mint(params).send();
       await op.confirmation();

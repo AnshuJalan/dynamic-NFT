@@ -1,8 +1,18 @@
+import { DefaultContractType } from "@taquito/taquito";
+
 export interface Config {
   rpc: string;
 }
 
-// Contract EP parameter types
+// Tezos
+
+export interface ExecuteViewParams {
+  metadataObject: any;
+  contract: DefaultContractType;
+  params: any;
+}
+
+// FA2
 
 export type TransferParams = Array<{
   from_: string;
@@ -19,7 +29,9 @@ export type UpdateOperatorParams = Array<
   { add_operator: OperatorKey } | { remove_operator: OperatorKey }
 >;
 
-export interface MintParams {
+// Brute
+
+export interface BruteMintParams {
   address: string;
   token_id: number;
   metadata: {
@@ -31,5 +43,24 @@ export interface UpdateTokenMetadataParams {
   token_id: number;
   metadata: {
     [key: string]: string;
+  };
+}
+
+// Point
+
+export interface PointMintParams {
+  address: string;
+  token_id: number;
+  state: {
+    prop_1: number;
+    prop_2: number;
+  };
+}
+
+export interface ChangeStateParams {
+  token_id: number;
+  state: {
+    prop_1: number;
+    prop_2: number;
   };
 }

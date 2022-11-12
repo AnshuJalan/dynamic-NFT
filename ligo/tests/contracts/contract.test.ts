@@ -1,7 +1,9 @@
-import Brute from "./brute";
 import FA2 from "./fa2-nft";
+import Brute from "./brute";
+import Point from "./point";
 
 describe("contracts", () => {
-  Brute();
-  FA2();
+  // FA2();
+  // Brute();
+  Point();
 });
