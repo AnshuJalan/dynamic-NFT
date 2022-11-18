@@ -43,7 +43,7 @@ type storage = {
     metadata: (string, bytes) big_map;
 }
 
-(* Brute Structure parameter types *)
+(* Point Structure parameter types *)
 
 type mint_params = [@layout:comb] { 
     address : address;
@@ -109,6 +109,13 @@ let token_metadata (token_id, store : nat * storage) : token_metadata_value =
         let prop_1 = bytes_of_nat s.prop_1 in
         let prop_2 = bytes_of_nat s.prop_2 in
         let b_token_id = bytes_of_nat token_id in
+        (* 
+            Contruct a URI (in bytes form) that points to a TZIP-21 based metadata JSON.
+            This is a sample construction. The form that your URI takes depends entirely on
+            how your artifacts are hosted.
+
+            Contructed URI: https://metadata_url.com/<prop_1>/<prop_2>/<token_id>
+        *)
         let metadata_uri = join_bytes [ metadata_url; slash; prop_1; slash; prop_2; slash; b_token_id; ] in
         { token_id = token_id; token_info = Map.literal [ ("", metadata_uri) ]; }
     end
