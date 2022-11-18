@@ -1,23 +1,24 @@
+/**
+ * This class forms a common interface template for Point, Create and SVG structure.
+ */
+
 import * as fs from "fs";
 import { DefaultContractType, TransactionOperation } from "@taquito/taquito";
 
 import Tezos from "./Tezos";
 import { ChangeStateParams, PointMintParams } from "../types";
 
-// Metadata json
-import metadata from "../../contracts/metadata/point.json";
-
-export default class Point {
+class CommonInterface {
   private _instance: DefaultContractType;
 
   constructor(instance: DefaultContractType) {
     this._instance = instance;
   }
 
-  static async originate(tezos: Tezos, storage: any): Promise<Point> {
+  static async originate(tezos: Tezos, storage: any): Promise<CommonInterface> {
     try {
       const code = fs.readFileSync(`${__dirname}/../../contracts/michelson/point.tz`).toString();
-      return new Point(await tezos.originate(code, storage));
+      return new CommonInterface(await tezos.originate(code, storage));
     } catch (err: any) {
       throw err;
     }
@@ -51,10 +52,10 @@ export default class Point {
     }
   }
 
-  async tokenMetadata(tezos: Tezos, tokenId: number): Promise<any> {
+  async tokenMetadata(tezos: Tezos, tzip16Metadata: any, tokenId: number): Promise<any> {
     try {
       return await tezos.executeView({
-        metadataObject: metadata,
+        metadataObject: tzip16Metadata,
         contract: this._instance,
         params: tokenId,
       });
@@ -63,3 +64,8 @@ export default class Point {
     }
   }
 }
+
+// All these structures have the same interface
+export const Point = CommonInterface;
+export const Create = CommonInterface;
+export const SVG = CommonInterface;
