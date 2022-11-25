@@ -6,19 +6,30 @@ import * as fs from "fs";
 import { DefaultContractType, TransactionOperation } from "@taquito/taquito";
 
 import Tezos from "./Tezos";
-import { ChangeStateParams, MintParams } from "../types";
+import { OracleMintParams } from "../types";
 
-class CommonInterface {
+export default class Oracle {
   private _instance: DefaultContractType;
 
   constructor(instance: DefaultContractType) {
     this._instance = instance;
   }
 
-  static async originate(tezos: Tezos, storage: any): Promise<CommonInterface> {
+  static async originate(tezos: Tezos, storage: any): Promise<Oracle> {
     try {
-      const code = fs.readFileSync(`${__dirname}/../../contracts/michelson/point.tz`).toString();
-      return new CommonInterface(await tezos.originate(code, storage));
+      const code = fs.readFileSync(`${__dirname}/../../contracts/michelson/oracle.tz`).toString();
+      return new Oracle(await tezos.originate(code, storage));
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  static async originateHelper(tezos: Tezos, storage: any): Promise<string> {
+    try {
+      const code = fs
+        .readFileSync(`${__dirname}/../../contracts/helpers/state_oracle.tz`)
+        .toString();
+      return (await tezos.originate(code, storage)).address;
     } catch (err: any) {
       throw err;
     }
@@ -32,19 +43,9 @@ class CommonInterface {
     }
   }
 
-  async mint(params: MintParams): Promise<TransactionOperation> {
+  async mint(params: OracleMintParams): Promise<TransactionOperation> {
     try {
       const op = await this._instance.methodsObject.mint(params).send();
-      await op.confirmation();
-      return op;
-    } catch (err: any) {
-      throw err;
-    }
-  }
-
-  async changeState(params: ChangeStateParams): Promise<TransactionOperation> {
-    try {
-      const op = await this._instance.methodsObject.change_state(params).send();
       await op.confirmation();
       return op;
     } catch (err: any) {
@@ -64,8 +65,3 @@ class CommonInterface {
     }
   }
 }
-
-// All these structures have the same interface
-export const Point = CommonInterface;
-export const Create = CommonInterface;
-export const SVG = CommonInterface;

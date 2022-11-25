@@ -46,9 +46,9 @@ export interface UpdateTokenMetadataParams {
   };
 }
 
-// Point
+// Point, Create, SVG
 
-export interface PointMintParams {
+export interface MintParams {
   address: string;
   token_id: number;
   state: {
@@ -63,4 +63,11 @@ export interface ChangeStateParams {
     prop_1: number;
     prop_2: number;
   };
+}
+
+// Oracle
+
+export interface OracleMintParams {
+  address: string;
+  token_id: number;
 }

@@ -1,0 +1,5 @@
+{ parameter unit ;
+  storage (pair (nat %prop_1) (nat %prop_2)) ;
+  code { CDR ; NIL operation ; PAIR } ;
+  view "get_state" nat (pair (nat %prop_1) (nat %prop_2)) { CDR } }
+
