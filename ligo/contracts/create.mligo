@@ -144,6 +144,7 @@ let token_metadata (token_id, store : nat * storage) : token_metadata_value =
                 ("thumbnailUri", thumbnail_uri);
                 ("artifactUri", image_uri);
                 ("displayUri", image_uri);
+                ("ttl", bytes_of_nat 600n);
             ]; 
         }
     end

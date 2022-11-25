@@ -190,6 +190,7 @@ const tests = () =>
         expect(tokenMetadata.token_info.get("displayUri")).toEqual(
           "68747470733a2f2f696d6167655f75726c2e636f6d2f352f362f312e706e67"
         );
+        expect(tokenMetadata.token_info.get("ttl")).toEqual("363030");
       });
 
       it("fails if the token does not exist", async () => {

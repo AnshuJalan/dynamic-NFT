@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "flextesa": "docker run --rm --name flextesa --detach -p 20000:20000 -e block_time=1 oxheadalpha/flextesa:latest jakartabox start"
+    "flextesa": "docker run --rm --name flextesa --detach -p 20000:20000 -e block_time=1 oxheadalpha/flextesa:latest kathmandubox start"
   },
   "keywords": [],
   "author": "",
