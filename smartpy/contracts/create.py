@@ -114,6 +114,7 @@ class Create(FA2_NFT.FA2_NFT):
             # Dynamic fields
             "artifactUri": image_uri,
             "displayUri": image_uri,
+            "ttl": bytes_of_nat(sp.nat(600)),
         }
 
         # Return the TZIP-16 compliant metadata
@@ -159,6 +160,7 @@ if __name__ == "__main__":
                 "thumbnailUri": sp.bytes("0x68747470733a2f2f696d6167655f75726c2e636f6d2f7468756d626e61696c2e706e67"),
                 "artifactUri": sp.bytes("0x68747470733a2f2f696d6167655f75726c2e636f6d2f302f312f32312e706e67"),
                 "displayUri": sp.bytes("0x68747470733a2f2f696d6167655f75726c2e636f6d2f302f312f32312e706e67"),
+                "ttl": sp.bytes("0x363030"),
             },
         )
 
