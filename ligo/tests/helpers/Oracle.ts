@@ -1,12 +1,8 @@
-/**
- * This class forms a common interface template for Point, Create and SVG structure.
- */
-
 import * as fs from "fs";
 import { DefaultContractType, TransactionOperation } from "@taquito/taquito";
 
 import Tezos from "./Tezos";
-import { OracleMintParams } from "../types";
+import { BasicMintParams } from "../types";
 
 export default class Oracle {
   private _instance: DefaultContractType;
@@ -26,9 +22,7 @@ export default class Oracle {
 
   static async originateHelper(tezos: Tezos, storage: any): Promise<string> {
     try {
-      const code = fs
-        .readFileSync(`${__dirname}/../../contracts/helpers/state_oracle.tz`)
-        .toString();
+      const code = fs.readFileSync(`${__dirname}/../../contracts/helpers/state_oracle.tz`).toString();
       return (await tezos.originate(code, storage)).address;
     } catch (err: any) {
       throw err;
@@ -43,7 +37,7 @@ export default class Oracle {
     }
   }
 
-  async mint(params: OracleMintParams): Promise<TransactionOperation> {
+  async mint(params: BasicMintParams): Promise<TransactionOperation> {
     try {
       const op = await this._instance.methodsObject.mint(params).send();
       await op.confirmation();

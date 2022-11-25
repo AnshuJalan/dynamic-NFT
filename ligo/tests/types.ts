@@ -25,9 +25,12 @@ export interface OperatorKey {
   token_id: number;
 }
 
-export type UpdateOperatorParams = Array<
-  { add_operator: OperatorKey } | { remove_operator: OperatorKey }
->;
+export type UpdateOperatorParams = Array<{ add_operator: OperatorKey } | { remove_operator: OperatorKey }>;
+
+export interface BasicMintParams {
+  address: string;
+  token_id: number;
+}
 
 // Brute
 
@@ -48,7 +51,7 @@ export interface UpdateTokenMetadataParams {
 
 // Point, Create, SVG
 
-export interface MintParams {
+export interface CommonMintParams {
   address: string;
   token_id: number;
   state: {
@@ -65,9 +68,16 @@ export interface ChangeStateParams {
   };
 }
 
-// Oracle
+// Game
 
-export interface OracleMintParams {
-  address: string;
+export interface ChangeWeaponParams {
   token_id: number;
+  weapon: {
+    [key: string]: {};
+  };
+}
+
+export interface AttackParams {
+  attacker_id: number;
+  victim_id: number;
 }

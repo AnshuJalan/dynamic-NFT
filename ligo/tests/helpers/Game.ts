@@ -1,24 +1,20 @@
-/**
- * This class forms a common interface template for Point, Create and SVG structure.
- */
-
 import * as fs from "fs";
 import { DefaultContractType, TransactionOperation } from "@taquito/taquito";
 
 import Tezos from "./Tezos";
-import { ChangeStateParams, CommonMintParams } from "../types";
+import { ChangeWeaponParams, AttackParams, BasicMintParams } from "../types";
 
-class CommonInterface {
+export default class Game {
   private _instance: DefaultContractType;
 
   constructor(instance: DefaultContractType) {
     this._instance = instance;
   }
 
-  static async originate(tezos: Tezos, storage: any): Promise<CommonInterface> {
+  static async originate(tezos: Tezos, codepath: string, storage: any): Promise<Game> {
     try {
-      const code = fs.readFileSync(`${__dirname}/../../contracts/michelson/point.tz`).toString();
-      return new CommonInterface(await tezos.originate(code, storage));
+      const code = fs.readFileSync(codepath).toString();
+      return new Game(await tezos.originate(code, storage));
     } catch (err: any) {
       throw err;
     }
@@ -32,7 +28,7 @@ class CommonInterface {
     }
   }
 
-  async mint(params: CommonMintParams): Promise<TransactionOperation> {
+  async mint(params: BasicMintParams): Promise<TransactionOperation> {
     try {
       const op = await this._instance.methodsObject.mint(params).send();
       await op.confirmation();
@@ -42,9 +38,19 @@ class CommonInterface {
     }
   }
 
-  async changeState(params: ChangeStateParams): Promise<TransactionOperation> {
+  async changeWeapon(params: ChangeWeaponParams): Promise<TransactionOperation> {
     try {
-      const op = await this._instance.methodsObject.change_state(params).send();
+      const op = await this._instance.methodsObject.change_weapon(params).send();
+      await op.confirmation();
+      return op;
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  async attack(params: AttackParams): Promise<TransactionOperation> {
+    try {
+      const op = await this._instance.methodsObject.attack(params).send();
       await op.confirmation();
       return op;
     } catch (err: any) {
@@ -64,8 +70,3 @@ class CommonInterface {
     }
   }
 }
-
-// All these structures have the same interface
-export const Point = CommonInterface;
-export const Create = CommonInterface;
-export const SVG = CommonInterface;
