@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="67.73333mm"
+   height="67.73333mm"
+   viewBox="0 0 67.733329 67.733329"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c8708, 2021-01-15)"
+   sodipodi:docname="drawing.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.23722123"
+     inkscape:cx="573.74993"
+     inkscape:cy="505.94178"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1536"
+     inkscape:window-height="835"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(614.55469,35.691013)">
+    <g
+       id="g897"
+       transform="matrix(0.19589882,0,0,0.19589882,-494.16415,-28.699186)">
+      <rect
+         style="fill:#0066ff;stroke:#d5f6ff;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
+         id="rect833"
+         width="345.75671"
+         height="345.75671"
+         x="-614.55469"
+         y="-35.691013" />
+      <g
+         id="g885"
+         transform="translate(0,1.7093332)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.184px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.879603"
+           x="-524.93768"
+           y="46.574394"
+           id="text837"><tspan
+             sodipodi:role="line"
+             id="tspan835"
+             x="-524.93768"
+             y="46.574394"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.879603">TOKEN ID</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.184px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.879603"
+           x="-458.55399"
+           y="103.45695"
+           id="text841"><tspan
+             sodipodi:role="line"
+             id="tspan839"
+             x="-458.55399"
+             y="103.45695"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.879603">21</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.184px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.879603"
+           x="-535.28845"
+           y="192.68449"
+           id="text871"><tspan
+             sodipodi:role="line"
+             id="tspan869"
+             x="-535.28845"
+             y="192.68449"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.879603">PROP SUM</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.184px;line-height:1.25;font-family:Arial;-inkscape-font-specification:Arial;stroke-width:0.879603"
+           x="-451.31415"
+           y="249.56705"
+           id="text875"><tspan
+             sodipodi:role="line"
+             id="tspan873"
+             x="-451.31415"
+             y="249.56705"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#ffffff;stroke-width:0.879603">6</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
