@@ -173,7 +173,7 @@ const tests = () =>
         /* Expected TZIP-21 based metadata: 
           {
             name: "dNFT SVG",
-            symbol: "dNFTC",
+            symbol: "dNFTS",
             decimals: "0",
             thumbnailUri: "https://image_url.com/thumbnail.png",
             artifactUri: SAMPLE_SVG_BYTES,
