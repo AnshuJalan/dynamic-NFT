@@ -89,7 +89,7 @@ class SVG(FA2_NFT.FA2_NFT):
         b_token_id = bytes_of_nat(token_id)
 
         # Construct the SVG data URI (in bytes form) using the helper
-        # NOTE: This is a sample constructure. You would need to write your
+        # NOTE: This is a sample construction. You would need to write your
         #       helper to join the different sections of the SVG data URI
         svg_bytes = DataSVG.build_svg(sp.record(token_id=b_token_id, prop_sum=prop_sum))
 
