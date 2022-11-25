@@ -180,8 +180,8 @@
                   }
                 ]
               },
-              { "prim": "DIG", "args": [ { "int": "4" } ] },
-              { "prim": "DUP", "args": [ { "int": "6" } ] },
+              { "prim": "DUP", "args": [ { "int": "5" } ] },
+              { "prim": "DUP", "args": [ { "int": "7" } ] },
               { "prim": "EXEC" },
               {
                 "prim": "PUSH",
@@ -199,6 +199,12 @@
               { "prim": "CONCAT" },
               { "prim": "SOME" },
               { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "displayUri" } ] },
+              { "prim": "UPDATE" },
+              { "prim": "SWAP" },
+              { "prim": "PUSH", "args": [ { "prim": "nat" }, { "int": "600" } ] },
+              { "prim": "EXEC" },
+              { "prim": "SOME" },
+              { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "ttl" } ] },
               { "prim": "UPDATE" },
               { "prim": "SWAP" },
               { "prim": "PAIR" }

@@ -102,6 +102,7 @@ class SVG(FA2_NFT.FA2_NFT):
             # Dynamic fields
             "artifactUri": svg_bytes,
             "displayUri": svg_bytes,
+            "ttl": bytes_of_nat(sp.nat(600)),
         }
 
         # Return the TZIP-16 compliant metadata
@@ -147,6 +148,7 @@ if __name__ == "__main__":
                 "thumbnailUri": sp.bytes("0x68747470733a2f2f696d6167655f75726c2e636f6d2f7468756d626e61696c2e706e67"),
                 "artifactUri": DataSVG.SAMPLE_BYTES,
                 "displayUri": DataSVG.SAMPLE_BYTES,
+                "ttl": sp.bytes("0x363030"),
             },
         )
 
