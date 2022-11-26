@@ -13,6 +13,8 @@ const tests = () =>
     let storage: any;
     const tezos = new Tezos(config);
 
+    let codepath = `${__dirname}/../../contracts/michelson/svg.tz`;
+
     beforeEach(() => {
       storage = {
         admin: accounts.alice.pkh, // Alice is the admin
@@ -28,7 +30,7 @@ const tests = () =>
       it("creates an NFT for the supplied address", async () => {
         tezos.setProvider(accounts.alice.sk);
 
-        const svg = await SVG.originate(tezos, storage);
+        const svg = await SVG.originate(tezos, codepath, storage);
 
         // When Alice mints token-id 1 for Bob
         await svg.mint({
@@ -53,7 +55,7 @@ const tests = () =>
         // Set Bob (not admin) as the sender
         tezos.setProvider(accounts.bob.sk);
 
-        const svg = await SVG.originate(tezos, storage);
+        const svg = await SVG.originate(tezos, codepath, storage);
 
         // When Bob mints token-id 1 for Alice, the txn fails
         await expect(
@@ -70,7 +72,7 @@ const tests = () =>
 
         storage.tokens.set(1, {});
 
-        const svg = await SVG.originate(tezos, storage);
+        const svg = await SVG.originate(tezos, codepath, storage);
 
         // When Alice mints token-id 1 for Bob, the txn fails
         await expect(
@@ -94,7 +96,7 @@ const tests = () =>
           prop_2: 6,
         });
 
-        const svg = await SVG.originate(tezos, storage);
+        const svg = await SVG.originate(tezos, codepath, storage);
 
         // When Alice changes the state of token-id 1
         await svg.changeState({
@@ -123,7 +125,7 @@ const tests = () =>
           prop_2: 6,
         });
 
-        const svg = await SVG.originate(tezos, storage);
+        const svg = await SVG.originate(tezos, codepath, storage);
 
         // When Bob changes the state of token-id 1, the txn fails
         await expect(
@@ -140,7 +142,7 @@ const tests = () =>
       it("fails if token id does not exist", async () => {
         tezos.setProvider(accounts.alice.sk);
 
-        const svg = await SVG.originate(tezos, storage);
+        const svg = await SVG.originate(tezos, codepath, storage);
 
         // When Alice changes the state of token-id 1, the txn fails
         await expect(
@@ -165,7 +167,7 @@ const tests = () =>
           prop_2: 6,
         });
 
-        const svg = await SVG.originate(tezos, storage);
+        const svg = await SVG.originate(tezos, codepath, storage);
 
         const tokenMetadata = await svg.tokenMetadata(tezos, metadata, 21);
 
@@ -192,7 +194,7 @@ const tests = () =>
       });
 
       it("fails if the token does not exist", async () => {
-        const svg = await SVG.originate(tezos, storage);
+        const svg = await SVG.originate(tezos, codepath, storage);
 
         await expect(svg.tokenMetadata(tezos, metadata, 1)).rejects.toThrow("FA2_TOKEN_UNDEFINED");
       });

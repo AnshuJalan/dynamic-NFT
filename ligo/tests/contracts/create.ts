@@ -12,6 +12,8 @@ const tests = () =>
     let storage: any;
     const tezos = new Tezos(config);
 
+    const codepath = `${__dirname}/../../contracts/michelson/point.tz`;
+
     beforeEach(() => {
       storage = {
         admin: accounts.alice.pkh, // Alice is the admin
@@ -27,7 +29,7 @@ const tests = () =>
       it("creates an NFT for the supplied address", async () => {
         tezos.setProvider(accounts.alice.sk);
 
-        const create = await Create.originate(tezos, storage);
+        const create = await Create.originate(tezos, codepath, storage);
 
         // When Alice mints token-id 1 for Bob
         await create.mint({
@@ -52,7 +54,7 @@ const tests = () =>
         // Set Bob (not admin) as the sender
         tezos.setProvider(accounts.bob.sk);
 
-        const create = await Create.originate(tezos, storage);
+        const create = await Create.originate(tezos, codepath, storage);
 
         // When Bob mints token-id 1 for Alice, the txn fails
         await expect(
@@ -69,7 +71,7 @@ const tests = () =>
 
         storage.tokens.set(1, {});
 
-        const create = await Create.originate(tezos, storage);
+        const create = await Create.originate(tezos, codepath, storage);
 
         // When Alice mints token-id 1 for Bob, the txn fails
         await expect(
@@ -93,7 +95,7 @@ const tests = () =>
           prop_2: 6,
         });
 
-        const create = await Create.originate(tezos, storage);
+        const create = await Create.originate(tezos, codepath, storage);
 
         // When Alice changes the state of token-id 1
         await create.changeState({
@@ -122,7 +124,7 @@ const tests = () =>
           prop_2: 6,
         });
 
-        const create = await Create.originate(tezos, storage);
+        const create = await Create.originate(tezos, codepath, storage);
 
         // When Bob changes the state of token-id 1, the txn fails
         await expect(
@@ -139,7 +141,7 @@ const tests = () =>
       it("fails if token id does not exist", async () => {
         tezos.setProvider(accounts.alice.sk);
 
-        const create = await Create.originate(tezos, storage);
+        const create = await Create.originate(tezos, codepath, storage);
 
         // When Alice changes the state of token-id 1, the txn fails
         await expect(
@@ -163,7 +165,7 @@ const tests = () =>
           prop_2: 6,
         });
 
-        const create = await Create.originate(tezos, storage);
+        const create = await Create.originate(tezos, codepath, storage);
 
         const tokenMetadata = await create.tokenMetadata(tezos, metadata, 1);
 
@@ -194,11 +196,9 @@ const tests = () =>
       });
 
       it("fails if the token does not exist", async () => {
-        const create = await Create.originate(tezos, storage);
+        const create = await Create.originate(tezos, codepath, storage);
 
-        await expect(create.tokenMetadata(tezos, metadata, 1)).rejects.toThrow(
-          "FA2_TOKEN_UNDEFINED"
-        );
+        await expect(create.tokenMetadata(tezos, metadata, 1)).rejects.toThrow("FA2_TOKEN_UNDEFINED");
       });
     });
   });

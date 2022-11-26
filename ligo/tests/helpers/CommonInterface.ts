@@ -15,9 +15,9 @@ class CommonInterface {
     this._instance = instance;
   }
 
-  static async originate(tezos: Tezos, storage: any): Promise<CommonInterface> {
+  static async originate(tezos: Tezos, codepath: string, storage: any): Promise<CommonInterface> {
     try {
-      const code = fs.readFileSync(`${__dirname}/../../contracts/michelson/point.tz`).toString();
+      const code = fs.readFileSync(codepath).toString();
       return new CommonInterface(await tezos.originate(code, storage));
     } catch (err: any) {
       throw err;
