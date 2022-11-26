@@ -17,7 +17,7 @@ let bytes_of_nat (num : nat) : bytes =
   let rec aux (n : nat) (res : bytes) : bytes =
     if n = 0n then res
     else aux (n / 10n) (Bytes.concat (Option.unopt (Map.find_opt (n mod 10n) nat_to_bytes)) res)
-  in aux num 0x
+  in aux (num / 10n) (Option.unopt (Map.find_opt (num mod 10n) nat_to_bytes))
 
 let join_bytes (l : bytes list) : bytes =
     let rec aux (l_aux : bytes list) (res : bytes) : bytes =

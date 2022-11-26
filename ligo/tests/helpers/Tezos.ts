@@ -33,6 +33,22 @@ export default class Tezos {
     }
   }
 
+  async getBalance(instance: DefaultContractType): Promise<any> {
+    try {
+      return await this._tezos.tz.getBalance(instance.address);
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
+  async getBalanceOf(address: string): Promise<any> {
+    try {
+      return await this._tezos.tz.getBalance(address);
+    } catch (err: any) {
+      throw err;
+    }
+  }
+
   async executeView(params: ExecuteViewParams) {
     try {
       const view = new MichelsonStorageView(
@@ -47,6 +63,14 @@ export default class Tezos {
       );
       return await view.executeView(params.params);
     } catch (err: any) {
+      throw err;
+    }
+  }
+
+  async transfer(to: string, amount: number) {
+    try {
+      return await this._tezos.contract.transfer({ to, amount, mutez: false });
+    } catch (err) {
       throw err;
     }
   }

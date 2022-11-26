@@ -1,0 +1,5 @@
+{ parameter unit ;
+  storage nat ;
+  code { CDR ; NIL operation ; PAIR } ;
+  view "getPrice" string (pair timestamp nat) { CDR ; NOW ; PAIR } }
+

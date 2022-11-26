@@ -9,4 +9,6 @@ let invalid_view = "INVALID_VIEW"
 
 let victim_already_dead = "VICTIM_ALREADY_DEAD"
 
+let zero_amount_being_locked = "ZERO_AMOUNT_BEING_LOCKED"
+
 #endif
