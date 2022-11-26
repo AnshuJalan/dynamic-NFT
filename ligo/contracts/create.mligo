@@ -41,7 +41,6 @@ type storage = {
     admin : address;
     ledger : ledger;
     operators : operators;
-    tokens : (nat, unit) big_map; // Records minted token-ids
     states : states;
     metadata: (string, bytes) big_map;
 }
@@ -72,12 +71,11 @@ type return = operation list * storage
 
 let mint (store : storage) (params : mint_params) : storage =
     if Tezos.get_sender () <> store.admin then failwith ERRORS.not_authorised
-    else if Big_map.mem params.token_id store.tokens then failwith ERRORS.token_id_already_exists
+    else if Big_map.mem params.token_id store.states then failwith ERRORS.token_id_already_exists
     else
-        let updated_tokens = Big_map.update params.token_id (Some ()) store.tokens in
         let updated_ledger = Big_map.update (params.address, params.token_id) (Some 1n) store.ledger in
         let updated_states = Big_map.update (params.token_id) (Some params.state) store.states in
-        { store with tokens = updated_tokens; ledger = updated_ledger; states = updated_states; }
+        { store with ledger = updated_ledger; states = updated_states; }
 
 (*
     `change_state` may be called differently in your implementation - for example, by an
@@ -85,7 +83,7 @@ let mint (store : storage) (params : mint_params) : storage =
 *)
 let change_state (store : storage) (params : change_state_params) : states =
     if Tezos.get_sender () <> store.admin then failwith ERRORS.not_authorised
-    else if not Big_map.mem params.token_id store.tokens then failwith FA2_ERRORS.fa2_token_undefined
+    else if not Big_map.mem params.token_id store.states then failwith FA2_ERRORS.fa2_token_undefined
     else Big_map.update (params.token_id) (Some params.state) store.states
 
 (* Main *)

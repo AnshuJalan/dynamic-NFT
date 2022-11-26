@@ -196,7 +196,6 @@
                 { "prim": "UNPAIR" },
                 { "prim": "SWAP" },
                 { "prim": "CDR" },
-                { "prim": "CAR" },
                 { "prim": "DUP", "args": [{ "int": "2" }] },
                 { "prim": "GET" },
                 {

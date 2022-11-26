@@ -17,8 +17,7 @@
     (pair (pair (pair (address %admin) (big_map %ledger (pair address nat) nat))
                 (big_map %metadata string bytes)
                 (big_map %operators (pair (address %owner) (address %operator) (nat %token_id)) unit))
-          (big_map %states nat (pair (nat %prop_1) (nat %prop_2)))
-          (big_map %tokens nat unit)) ;
+          (big_map %states nat (pair (nat %prop_1) (nat %prop_2)))) ;
   code { PUSH string "NOT_AUTHORISED" ;
          PUSH string "FA2_NOT_OWNER" ;
          LAMBDA
@@ -83,28 +82,23 @@
                    { DIG 2 ;
                      DROP ;
                      DUP 2 ;
-                     CDR ;
-                     CDR ;
-                     DUP 3 ;
                      CAR ;
                      CAR ;
                      CAR ;
                      SENDER ;
                      COMPARE ;
                      NEQ ;
-                     IF { SWAP ; DROP ; DIG 2 ; FAILWITH }
-                        { DIG 3 ;
+                     IF { DROP ; SWAP ; FAILWITH }
+                        { DIG 2 ;
                           DROP ;
-                          DUP 3 ;
+                          DUP 2 ;
                           CDR ;
-                          CDR ;
-                          DUP 3 ;
+                          DUP 2 ;
                           CAR ;
                           MEM ;
                           NOT ;
-                          IF { SWAP ; DROP ; PUSH string "FA2_TOKEN_UNDEFINED" ; FAILWITH }
-                             { DUP 3 ; CDR ; CAR ; DUP 3 ; CDR ; SOME ; DIG 3 ; CAR ; UPDATE } } ;
-                     PAIR ;
+                          IF { DROP ; PUSH string "FA2_TOKEN_UNDEFINED" ; FAILWITH }
+                             { DUP 2 ; CDR ; DUP 2 ; CDR ; SOME ; DIG 2 ; CAR ; UPDATE } } ;
                      SWAP ;
                      CAR ;
                      PAIR ;
@@ -124,40 +118,30 @@
                           DROP ;
                           DUP 2 ;
                           CDR ;
-                          CDR ;
                           DUP 2 ;
                           GET 3 ;
                           MEM ;
                           IF { DROP 2 ; PUSH string "TOKEN_ID_ALREADY_EXISTS" ; FAILWITH }
                              { DUP 2 ;
                                CDR ;
-                               CDR ;
-                               UNIT ;
+                               DUP 2 ;
+                               GET 4 ;
                                SOME ;
                                DUP 3 ;
                                GET 3 ;
                                UPDATE ;
                                DUP 3 ;
-                               CDR ;
-                               CAR ;
-                               PAIR ;
-                               DUP 3 ;
-                               CAR ;
-                               PAIR ;
-                               DUP ;
-                               CDR ;
-                               DUP 2 ;
                                CAR ;
                                CDR ;
-                               DUP 5 ;
+                               DUP 4 ;
                                CAR ;
                                CAR ;
                                CDR ;
                                PUSH nat 1 ;
                                SOME ;
-                               DUP 6 ;
+                               DUP 5 ;
                                GET 3 ;
-                               DUP 7 ;
+                               DIG 5 ;
                                CAR ;
                                PAIR ;
                                UPDATE ;
@@ -167,22 +151,6 @@
                                CAR ;
                                PAIR ;
                                PAIR ;
-                               PAIR ;
-                               DUP ;
-                               CDR ;
-                               CDR ;
-                               DIG 3 ;
-                               CDR ;
-                               CAR ;
-                               DUP 4 ;
-                               GET 4 ;
-                               SOME ;
-                               DIG 4 ;
-                               GET 3 ;
-                               UPDATE ;
-                               PAIR ;
-                               SWAP ;
-                               CAR ;
                                PAIR } } }
                    { DIG 3 ;
                      DROP ;

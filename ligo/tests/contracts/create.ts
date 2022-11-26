@@ -1,4 +1,4 @@
-import { MichelsonMap, UnitValue } from "@taquito/taquito";
+import { MichelsonMap } from "@taquito/taquito";
 
 import { Create } from "../helpers/CommonInterface";
 import Tezos from "../helpers/Tezos";
@@ -18,7 +18,6 @@ const tests = () =>
       storage = {
         admin: accounts.alice.pkh, // Alice is the admin
         ledger: MichelsonMap.fromLiteral({}),
-        tokens: MichelsonMap.fromLiteral({}),
         states: MichelsonMap.fromLiteral({}),
         operators: MichelsonMap.fromLiteral({}),
         metadata: MichelsonMap.fromLiteral({}),
@@ -47,7 +46,6 @@ const tests = () =>
         expect(bobBalance.toNumber()).toEqual(1);
         expect(token1State.prop_1.toNumber()).toEqual(5);
         expect(token1State.prop_2.toNumber()).toEqual(6);
-        expect(await updatedStorage.tokens.get(1)).toEqual(UnitValue);
       });
 
       it("fails if sender is not the admin", async () => {
@@ -69,7 +67,7 @@ const tests = () =>
       it("fails if token id already exists", async () => {
         tezos.setProvider(accounts.alice.sk);
 
-        storage.tokens.set(1, {});
+        storage.states.set(1, { prop_1: 5, prop_2: 6 });
 
         const create = await Create.originate(tezos, codepath, storage);
 
@@ -87,8 +85,6 @@ const tests = () =>
     describe("change_state", () => {
       it("correctly changes the state of a token", async () => {
         tezos.setProvider(accounts.alice.sk);
-
-        storage.tokens.set(1, {});
 
         storage.states.set(1, {
           prop_1: 5,
@@ -158,8 +154,6 @@ const tests = () =>
 
     describe("token_metadata - offchain view", () => {
       it("correctly returns the token metadata", async () => {
-        storage.tokens.set(1, {});
-
         storage.states.set(1, {
           prop_1: 5,
           prop_2: 6,
