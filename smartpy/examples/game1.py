@@ -161,9 +161,10 @@ class Game(FA2_Lib):
         metadata_url = sp.utils.bytes_of_string("https://metadata_url.com")
         metadata_uri = metadata_url + slash + b_lives + slash + b_weapon + slash + b_token_id
 
-        # NOTE: The metadata URI generated above is a dummy one. To get a better idea, here's
-        # what the image that the 'artifactUri' for token-id 21, with 2 lives left and pistol
-        # as a weapon may look like >> https://gateway.pinata.cloud/ipfs/QmdxHSsGvT6WwYZz4k331C7HpxTiJArv7BwJQj5GahZJoZ
+        # NOTE: The metadata URI generated is a dummy one. To get a better idea, the image for
+        # the 'artifactUri' of token-id 21, with 2 lives left and pistol as a weapon may
+        # look like the one given at ../../assets/svg_game.png
+        #
         # A more well-made graphic will possibly include a figurine with a dynamic weapon
         # and changing body structure based on lives left.
 

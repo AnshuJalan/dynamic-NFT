@@ -147,8 +147,8 @@ let token_metadata (token_id, store : nat * storage) : token_metadata_value =
         (* 
             Contruct a URI (in bytes form) that points to a TZIP-21 based metadata JSON.
 
-            The image_uri would point to an image that may look like:
-            >> https://gateway.pinata.cloud/ipfs/QmdxHSsGvT6WwYZz4k331C7HpxTiJArv7BwJQj5GahZJoZ
+            The image_uri would point to an image that may look like the one given
+            at ../../assets/svg_game.png
         *)
         let image_uri = join_bytes [ image_url; slash; b_lives; slash; b_weapon; slash; b_token_id; png; ] in
         { 

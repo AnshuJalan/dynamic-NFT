@@ -1,7 +1,7 @@
 import smartpy as sp
 
 # Builds an SVG by concatenating different sections of the data URI
-# Final sample output given at ./samples/svg_example.svg
+# Final sample output given at ../../assets/svg_example.svg
 def build_svg(params):
     sp.set_type(
         params,

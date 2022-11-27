@@ -161,8 +161,8 @@ class Game(FA2_Lib):
         image_url = sp.utils.bytes_of_string("https://image_url.com")
         image_uri = image_url + slash + b_lives + slash + b_weapon + slash + b_token_id + png
 
-        # NOTE: The image_uri would point to an image that may look like
-        # >> https://gateway.pinata.cloud/ipfs/QmdxHSsGvT6WwYZz4k331C7HpxTiJArv7BwJQj5GahZJoZ
+        # NOTE: The image_uri would point to an image that may look like the one given
+        # at ../../assets/svg_game.png
 
         # Create a TZIP-21 compliant token-info
         metadata_tzip_21 = {
