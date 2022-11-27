@@ -27,12 +27,12 @@
               { "prim": "MEM" },
               { "prim": "IF", "args": [ [], [ { "prim": "PUSH", "args": [ { "prim": "string" }, { "string": "FA2_TOKEN_UNDEFINED" } ] }, { "prim": "FAILWITH" } ] ] },
               { "prim": "SWAP" },
-              { "prim": "GET", "args": [ { "int": "5" } ] },
+              { "prim": "GET", "args": [ { "int": "6" } ] },
               { "prim": "SWAP" },
               { "prim": "DUP" },
               { "prim": "DUG", "args": [ { "int": "2" } ] },
               { "prim": "GET" },
-              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "137" } ] }, { "prim": "FAILWITH" } ], [] ] },
+              { "prim": "IF_NONE", "args": [ [ { "prim": "PUSH", "args": [ { "prim": "int" }, { "int": "140" } ] }, { "prim": "FAILWITH" } ], [] ] },
               {
                 "prim": "LAMBDA",
                 "args": [
