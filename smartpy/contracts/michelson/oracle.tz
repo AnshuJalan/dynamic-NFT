@@ -17,20 +17,6 @@ code
             CAR;        # list (pair (address %owner) (nat %token_id)) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
             ITER
               {
-                # sp.verify(self.data.tokens.contains(request.token_id), 'FA2_TOKEN_UNDEFINED') # pair (address %owner) (nat %token_id) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                DUP 4;      # @storage : pair (address %owner) (nat %token_id) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                GET 6;      # big_map nat unit : pair (address %owner) (nat %token_id) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                SWAP;       # pair (address %owner) (nat %token_id) : big_map nat unit : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                DUP;        # pair (address %owner) (nat %token_id) : pair (address %owner) (nat %token_id) : big_map nat unit : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                DUG 2;      # pair (address %owner) (nat %token_id) : big_map nat unit : pair (address %owner) (nat %token_id) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                CDR;        # nat : big_map nat unit : pair (address %owner) (nat %token_id) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                MEM;        # bool : pair (address %owner) (nat %token_id) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                IF
-                  {}
-                  {
-                    PUSH string "FA2_TOKEN_UNDEFINED"; # string : pair (address %owner) (nat %token_id) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
-                    FAILWITH;   # FAILED
-                  }; # pair (address %owner) (nat %token_id) : list (pair (pair address nat) nat) : @parameter%balance_of : @storage
                 SWAP;       # list (pair (pair address nat) nat) : pair (address %owner) (nat %token_id) : @parameter%balance_of : @storage
                 # response.value.push(sp.record(request = request, balance = 0)) # list (pair (pair address nat) nat) : pair (address %owner) (nat %token_id) : @parameter%balance_of : @storage
                 PUSH nat 0; # nat : list (pair (pair address nat) nat) : pair (address %owner) (nat %token_id) : @parameter%balance_of : @storage
@@ -182,7 +168,7 @@ code
                         GET;        # option nat : nat : big_map (pair address nat) nat : big_map string bytes : address : pair (big_map %operators (pair (address %owner) (pair (address %operator) (nat %token_id))) unit) (pair (address %oracle_address) (big_map %tokens nat unit)) : pair (address %to_) (pair (nat %token_id) (nat %amount)) : pair (address %from_) (list %txs (pair (address %to_) (pair (nat %token_id) (nat %amount)))) : list (pair (address %from_) (list %txs (pair (address %to_) (pair (nat %token_id) (nat %amount)))))
                         IF_NONE
                           {
-                            PUSH int 125; # int : nat : big_map (pair address nat) nat : big_map string bytes : address : pair (big_map %operators (pair (address %owner) (pair (address %operator) (nat %token_id))) unit) (pair (address %oracle_address) (big_map %tokens nat unit)) : pair (address %to_) (pair (nat %token_id) (nat %amount)) : pair (address %from_) (list %txs (pair (address %to_) (pair (nat %token_id) (nat %amount)))) : list (pair (address %from_) (list %txs (pair (address %to_) (pair (nat %token_id) (nat %amount)))))
+                            PUSH int 95; # int : nat : big_map (pair address nat) nat : big_map string bytes : address : pair (big_map %operators (pair (address %owner) (pair (address %operator) (nat %token_id))) unit) (pair (address %oracle_address) (big_map %tokens nat unit)) : pair (address %to_) (pair (nat %token_id) (nat %amount)) : pair (address %from_) (list %txs (pair (address %to_) (pair (nat %token_id) (nat %amount)))) : list (pair (address %from_) (list %txs (pair (address %to_) (pair (nat %token_id) (nat %amount)))))
                             FAILWITH;   # FAILED
                           }
                           {}; # @some : nat : big_map (pair address nat) nat : big_map string bytes : address : pair (big_map %operators (pair (address %owner) (pair (address %operator) (nat %token_id))) unit) (pair (address %oracle_address) (big_map %tokens nat unit)) : pair (address %to_) (pair (nat %token_id) (nat %amount)) : pair (address %from_) (list %txs (pair (address %to_) (pair (nat %token_id) (nat %amount)))) : list (pair (address %from_) (list %txs (pair (address %to_) (pair (nat %token_id) (nat %amount)))))

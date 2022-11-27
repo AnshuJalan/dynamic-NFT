@@ -18,10 +18,11 @@
 
 import smartpy as sp
 
-FA2_NFT = sp.io.import_script_from_url("file:fa2_nft.py")
 Utils = sp.io.import_script_from_url("file:../common/utils.py")
 Errors = sp.io.import_script_from_url("file:../common/errors.py")
 Addresses = sp.io.import_script_from_url("file:../common/addresses.py")
+FA2_Errors = sp.io.import_script_from_url("file:../common/fa2/fa2_lib.py").FA2_Errors
+FA2_Lib = sp.io.import_script_from_url("file:../common/fa2/fa2_lib.py").FA2_Lib
 
 
 class Types:
@@ -31,24 +32,25 @@ class Types:
     STATE = sp.TRecord(prop_1=sp.TNat, prop_2=sp.TNat)
 
 
-class Create(FA2_NFT.FA2_NFT):
+class Create(FA2_Lib):
     def __init__(
         self,
+        admin=Addresses.ADMIN,
         # A mapping from token_id to the state of an NFT
         states=sp.big_map(
             l={},
             tkey=sp.TNat,
             tvalue=Types.STATE,
         ),
-        # IPFS links hosts the metadata at ./metadata/create.json
+        # IPFS link hosts the metadata at ./metadata/create.json
         metadata=sp.utils.metadata_of_url("ipfs://QmbWG4Qoqg4p6HkK2jYdG9Dyyww6Bqc6zUaUwNsGTDQWFN"),
         **kwargs
     ):
-        # Use the storage and entrypoints of the base FA2 NFT contract
-        FA2_NFT.FA2_NFT.__init__(self, **kwargs)
+        # Use the storage and entrypoints of the FA2 lib
+        FA2_Lib.__init__(self, **kwargs)
 
-        # Add a states object to the existing FA2 NFT storage
-        self.update_initial_storage(states=states, metadata=metadata)
+        # Add admin, states and metadata to the existing storage
+        self.update_initial_storage(admin=admin, states=states, metadata=metadata)
 
         METADATA = {
             "name": "dNFT Create",
@@ -61,7 +63,27 @@ class Create(FA2_NFT.FA2_NFT):
         # Smartpy's helper to create the metadata json
         self.init_metadata("metadata", METADATA)
 
-    # This may called by an admin, another authorised contract or internally by the same contract
+    @sp.entry_point
+    def mint(self, params):
+        sp.set_type(
+            params,
+            sp.TRecord(
+                address=sp.TAddress,
+                token_id=sp.TNat,
+                state=Types.STATE,
+            ),
+        )
+
+        # Sanity checks
+        sp.verify(sp.sender == self.data.admin, Errors.NOT_AUTHORISED)
+        sp.verify(~self.data.states.contains(params.token_id), Errors.TOKEN_ID_ALREADY_EXISTS)
+
+        # Mint the token
+        self.data.ledger[(params.address, params.token_id)] = 1
+        self.data.states[params.token_id] = params.state
+
+    # This may called by an admin, another authorised contract or internally by the same contract.
+    # Call structure depends on the use-case
     @sp.entry_point
     def change_state(self, params):
         sp.set_type(
@@ -69,10 +91,10 @@ class Create(FA2_NFT.FA2_NFT):
             sp.TRecord(token_id=sp.TNat, state=Types.STATE),
         )
 
-        # NOTE: add a sender verifier based on your use-case
+        sp.verify(sp.sender == self.data.admin, Errors.NOT_AUTHORISED)
 
         # Verify that token exists
-        sp.verify(self.data.tokens.contains(params.token_id), FA2_NFT.FA2_Errors.FA2_TOKEN_UNDEFINED)
+        sp.verify(self.data.states.contains(params.token_id), FA2_Errors.FA2_TOKEN_UNDEFINED)
 
         # Update the state of the entity behind the token_id
         self.data.states[params.token_id] = params.state
@@ -83,7 +105,7 @@ class Create(FA2_NFT.FA2_NFT):
         sp.set_type(token_id, sp.TNat)
 
         # Verify that token id exist
-        sp.verify(self.data.tokens.contains(token_id), FA2_NFT.FA2_Errors.FA2_TOKEN_UNDEFINED)
+        sp.verify(self.data.states.contains(token_id), FA2_Errors.FA2_TOKEN_UNDEFINED)
 
         # Fetch the current state of the entity behind the token-id
         state = sp.compute(self.data.states[token_id])
@@ -132,17 +154,126 @@ class Create(FA2_NFT.FA2_NFT):
 
 if __name__ == "__main__":
 
+    @sp.add_test(name="mint - correctly mints an NFT")
+    def test():
+        scenario = sp.test_scenario()
+
+        create = Create()
+        scenario += create
+
+        # When the ADMIN mints an NFT with token-id 1 for Alice
+        scenario += create.mint(
+            address=Addresses.ALICE,
+            token_id=1,
+            state=sp.record(prop_1=5, prop_2=6),
+        ).run(sender=Addresses.ADMIN)
+
+        # The storage is updated correctly
+        scenario.verify(create.data.ledger[(Addresses.ALICE, 1)] == 1)
+        scenario.verify(create.data.states[1] == sp.record(prop_1=5, prop_2=6))
+
+    @sp.add_test(name="mint - fails if sender is not the admin")
+    def test():
+        scenario = sp.test_scenario()
+
+        create = Create()
+        scenario += create
+
+        # When the ALICE (not admin) mints an NFT with token-id 1, txn fails
+        scenario += create.mint(
+            address=Addresses.ALICE,
+            token_id=1,
+            state=sp.record(prop_1=5, prop_2=6),
+        ).run(sender=Addresses.ALICE, valid=False, exception=Errors.NOT_AUTHORISED)
+
+    @sp.add_test(name="mint - fails if token already exists")
+    def test():
+        scenario = sp.test_scenario()
+
+        create = Create(
+            states=sp.big_map(
+                {
+                    1: sp.record(prop_1=5, prop_2=6),
+                }
+            )
+        )
+        scenario += create
+
+        # When the ADMIN mints an NFT with token-id 1 (already exists), txn fails
+        scenario += create.mint(
+            address=Addresses.ALICE,
+            token_id=1,
+            state=sp.record(prop_1=5, prop_2=6),
+        ).run(sender=Addresses.ADMIN, valid=False, exception=Errors.TOKEN_ID_ALREADY_EXISTS)
+
+    @sp.add_test(name="change_state - updates the state of a token")
+    def test():
+        scenario = sp.test_scenario()
+
+        # Insert an arbitrary token-id and state
+        create = Create(
+            states=sp.big_map(
+                l={
+                    21: sp.record(prop_1=0, prop_2=1),
+                },
+            ),
+        )
+        scenario += create
+
+        new_state = sp.record(prop_1=5, prop_2=10)
+
+        # Call change_state on token 21 and assign a new state
+        scenario += create.change_state(
+            token_id=21,
+            state=new_state,
+        ).run(sender=Addresses.ADMIN)
+
+        # State is updated correctly
+        scenario.verify(create.data.states[21] == new_state)
+
+    @sp.add_test(name="change_state - fails if sender is not the admin")
+    def test():
+        scenario = sp.test_scenario()
+
+        # Insert an arbitrary token-id and state
+        create = Create(
+            states=sp.big_map(
+                l={
+                    21: sp.record(prop_1=0, prop_2=1),
+                },
+            ),
+        )
+        scenario += create
+
+        new_state = sp.record(prop_1=5, prop_2=10)
+
+        # When ALICE (not admin) tries to update the state, txn fails
+        scenario += create.change_state(
+            token_id=21,
+            state=new_state,
+        ).run(sender=Addresses.ALICE, valid=False, exception=Errors.NOT_AUTHORISED)
+
+    @sp.add_test(name="change_state - fails if token does not exist")
+    def test():
+        scenario = sp.test_scenario()
+
+        create = Create()
+        scenario += create
+
+        new_state = sp.record(prop_1=5, prop_2=10)
+
+        # When ADMIN tries to update the state of token-d 21 (does not exist), txn fails
+        scenario += create.change_state(
+            token_id=21,
+            state=new_state,
+        ).run(sender=Addresses.ADMIN, valid=False, exception=FA2_Errors.FA2_TOKEN_UNDEFINED)
+
     @sp.add_test(name="token_metadata - returns the correct metadata")
     def test():
         scenario = sp.test_scenario()
 
         # Insert an arbitrary token-id and state
         create_fa2 = Create(
-            tokens=sp.big_map(
-                l={
-                    21: sp.unit,
-                },
-            ),
             states=sp.big_map(
                 l={
                     21: sp.record(prop_1=0, prop_2=1),
@@ -166,34 +297,13 @@ if __name__ == "__main__":
 
         scenario.verify_equal(create_fa2.token_metadata(21), expected_metadata)
 
-    @sp.add_test(name="change_state - updates the state of a token")
+    @sp.add_test(name="token_metadata - fails if token does not exist")
     def test():
         scenario = sp.test_scenario()
 
-        # Insert an arbitrary token-id and state
-        create = Create(
-            tokens=sp.big_map(
-                l={
-                    21: sp.unit,
-                },
-            ),
-            states=sp.big_map(
-                l={
-                    21: sp.record(prop_1=0, prop_2=1),
-                },
-            ),
-        )
+        create = Create()
         scenario += create
 
-        new_state = sp.record(prop_1=5, prop_2=10)
-
-        # Call change_state on token 21 and assign a new state
-        scenario += create.change_state(
-            token_id=21,
-            state=new_state,
-        )
-
-        # State is updated correctly
-        scenario.verify(create.data.states[21] == new_state)
+        scenario.verify(sp.is_failing(create.token_metadata(21)))
 
     sp.add_compilation_target("create", Create())
