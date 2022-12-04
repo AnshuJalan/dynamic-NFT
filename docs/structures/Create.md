@@ -1,7 +1,7 @@
 # 🧱 Create Structure
 
-- Create structure allows for more naturally dynamic token metadata similar to [Point](), but instead of building an external link to a TZIP-21 Json, it builds and serves the JSON through an off-chain view.
-- It is useful when most of the fields in the metadata JSON are static or the off-chain datastore needs to be simplified. For instance, if a token has fixed 'symbol' and 'decimals' and a static thumbnailUri, only fields like artifactUri and displayUri need to be dynamically generated. These may be an external link or an SVG (as shown in [SVG]() Structure).
+- Create structure allows for more naturally dynamic token metadata similar to [Point](https://github.com/AnshuJalan/tezos-dNFT/blob/master/docs/structures/Point.md), but instead of building an external link to a TZIP-21 Json, it builds and serves the JSON through an off-chain view.
+- It is useful when most of the fields in the metadata JSON are static or the off-chain datastore needs to be simplified. For instance, if a token has fixed 'symbol' and 'decimals' and a static thumbnailUri, only fields like artifactUri and displayUri need to be dynamically generated. These may be an external link or an SVG (as shown in [SVG](https://github.com/AnshuJalan/tezos-dNFT/blob/master/docs/structures/SVG.md) Structure).
 - The state of a dNFT is defined by two properties `prop_1` and `prop_2`, which they can be updated through the `change_state` entrypoint.
 - The dynamically created artifact URI takes the form `<base url>/<prop_1>/<prop_2>`.
 

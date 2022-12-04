@@ -15,7 +15,7 @@ SVG structure is useful when:
 ### Example
 
 - A card based fantasy game NFT. The card represents a character and shows it's attributes.
-- An extension of the Defi position example given in [Oracle]() structure, with the artifact being an SVG.
+- An extension of the Defi position example given in [Oracle](https://github.com/AnshuJalan/tezos-dNFT/blob/master/docs/structures/Oracle.md) structure, with the artifact being an SVG.
 
 The example given at [/smartpy/examples/locker.py](https://github.com/AnshuJalan/tezos-dNFT/blob/master/smartpy/examples/locker.py) and [/ligo/examples/locker.mligo](https://github.com/AnshuJalan/tezos-dNFT/blob/master/ligo/examples/locker.mligo) combine Oracle and SVG structure.
 

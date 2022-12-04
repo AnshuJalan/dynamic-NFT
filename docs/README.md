@@ -1,8 +1,8 @@
 # 📑 Documentation
 
-Developers who are new to writing smart contracts on Tezos should start with [Get Started (Smartpy)]() or [Get Started (LIGO)](), depending on the language of choice and then head back to this page and continue reading. If you are accustomed to Tezos contracts, but new to NFTs - it would be nice to give a quick read to the content below to understand the basics of how NFT metadata is represented on Tezos.
+Developers who are new to writing smart contracts on Tezos should start with [Get Started (Smartpy)](https://github.com/AnshuJalan/tezos-dNFT/tree/master/smartpy) or [Get Started (LIGO)](https://github.com/AnshuJalan/tezos-dNFT/tree/master/ligo), depending on the language of choice and then head back to this page and continue reading. If you are accustomed to Tezos contracts, but new to NFTs - it would be nice to give a quick read to the content below to understand the basics of how NFT metadata is represented on Tezos.
 
-For those who are hacking away NFT contracts for a while, you are ready to jump straight to [Understanding Stuctures]().
+For those who are hacking away NFT contracts for a while, you are ready to jump straight to [Understanding Stuctures](https://github.com/AnshuJalan/tezos-dNFT/tree/master/docs/structures).
 
 ## What good is dynamic NFT metadata?
 
@@ -47,4 +47,4 @@ In repo, we will mostly be dealing with the following fields:
 - `ttl` **(integer)**
   - The number of seconds the metadata should be cached.
 
-Now, you are now well prepared to delve deeper into the code to make dynamic NFTs by moving onto [Understanding Structures]()!
+Now, you are now well prepared to delve deeper into the code to make dynamic NFTs by moving onto [Understanding Structures](https://github.com/AnshuJalan/tezos-dNFT/tree/master/docs/structures)!

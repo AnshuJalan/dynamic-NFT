@@ -16,18 +16,22 @@ A total of 5 named `structures` or **dNFT blueprints** are provided:
 - `Oracle structure` - Goes a step ahead and allows for dynamic metadata based on some external state received from an _oracle_.
 - `SVG structure` - The most ambitious of all, this enables the dynamic creation of an SVG graphic for the NFT metadata, entirely on the chain.
 
-Each of these structure can be used in a different context depending upon the use-case of the developer. A deeper explanation is provided in the '[How to choose a structure?]()' section. Also, a total of 3 examples are provided that properly display how the structures can be used by developers in their projects.
+Each of these structure can be used in a different context depending upon the use-case of the developer. A deeper explanation is provided in the '[How to choose a structure?](https://github.com/AnshuJalan/tezos-dNFT/tree/master/docs/structures#how-to-choose-a-structure)' section. Also, a total of 3 examples are provided that properly display how the structures can be used by developers in their projects.
 
-If you are a beginner in your understanding of smart contracts on Tezos, you can either choose [Get Started (LIGO)]() or [Get Started (Smartpy)](), depending on your language of choice. If you are already comfortable with Tezos contract, you can head to the [main documentation]().
+If you are a beginner in your understanding of smart contracts on Tezos, you can either choose [Get Started (LIGO)](https://github.com/AnshuJalan/tezos-dNFT/tree/master/ligo) or [Get Started (Smartpy)](https://github.com/AnshuJalan/tezos-dNFT/tree/master/smartpy), depending on your language of choice. If you are already comfortable with Tezos contract, you can head to the [main documentation](https://github.com/AnshuJalan/tezos-dNFT/tree/master/docs).
 
 ### Folder layout
 
 ```
 \
 |————— assets/ # images used as NFT graphic
+.
 |————— docs/ # markdown files for documentation
+.
 |————— ligo/ # structures and examples in LIGO
+.
 |————— smartpy/ # structures and examples in Smartpy
+.
 |————— .gitignore
 |————— LICENSE
 ```
