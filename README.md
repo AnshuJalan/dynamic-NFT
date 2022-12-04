@@ -18,13 +18,17 @@ A total of 5 named `structures` or **dNFT blueprints** are provided:
 
 Each of these structure can be used in a different context depending upon the use-case of the developer. A deeper explanation is provided in the '[How to choose a structure?](https://github.com/AnshuJalan/tezos-dNFT/tree/master/docs/structures#how-to-choose-a-structure)' section. Also, a total of 3 examples are provided that properly display how the structures can be used by developers in their projects.
 
-If you are a beginner in your understanding of smart contracts on Tezos, you can either choose [Get Started (LIGO)](https://github.com/AnshuJalan/tezos-dNFT/tree/master/ligo) or [Get Started (Smartpy)](https://github.com/AnshuJalan/tezos-dNFT/tree/master/smartpy), depending on your language of choice. If you are already comfortable with Tezos contract, you can head to the [main documentation](https://github.com/AnshuJalan/tezos-dNFT/tree/master/docs).
+If you are a beginner in your understanding of smart contracts on Tezos, you can either choose [Get Started (LIGO)](https://github.com/AnshuJalan/tezos-dNFT/tree/master/ligo) or [Get Started (Smartpy)](https://github.com/AnshuJalan/tezos-dNFT/tree/master/smartpy), depending on your language of choice. If you are already comfortable with Tezos contract, you can head over to the [main documentation](https://github.com/AnshuJalan/tezos-dNFT/tree/master/docs).
+
+If you want to checkout examples deployed on ghostnet, take a look at the [deploy](https://github.com/AnshuJalan/tezos-dNFT/tree/master/deploy) folder.
 
 ### Folder layout
 
 ```
 \
 |————— assets/ # images used as NFT graphic
+.
+|————— deploy/ # deployment scripts and list of examples deployed on ghostnet
 .
 |————— docs/ # markdown files for documentation
 .
