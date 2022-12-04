@@ -43,7 +43,7 @@ class Create(FA2_Lib):
             tvalue=Types.STATE,
         ),
         # IPFS link hosts the metadata at ./metadata/create.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmbWG4Qoqg4p6HkK2jYdG9Dyyww6Bqc6zUaUwNsGTDQWFN"),
+        metadata=sp.utils.metadata_of_url("ipfs://QmUnvi9cQADj95FVdStweU7S4b2BYD8HCcvEhyEKEr4Bo4"),
         **kwargs
     ):
         # Use the storage and entrypoints of the FA2 lib

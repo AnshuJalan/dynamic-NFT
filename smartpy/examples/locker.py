@@ -39,7 +39,7 @@ class Locker(FA2_Lib):
         lock_count=sp.nat(0),
         harbinger_address=sp.address("KT1ENe4jbDE1QVG1euryp23GsAeWuEwJutQX"),
         # IPFS link hosts the metadata at ./metadata/locker.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmW9PqNeya35w5kek5P7kEsgiihRQVJQ4aXBRmtjoNw7We"),
+        metadata=sp.utils.metadata_of_url("ipfs://QmYMA1iwLzqcx7zLzbgHrquX75EDMcMYLy8yva8SAxGRFL"),
         **kwargs,
     ):
         # Use the storage and entrypoints of the FA2 lib

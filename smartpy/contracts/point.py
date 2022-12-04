@@ -40,7 +40,7 @@ class Point(FA2_Lib):
             tvalue=Types.STATE,
         ),
         # IPFS link hosts the metadata at ./metadata/point.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmU69Krzk3f872kCk6WLdaftyUYA1CPwa1Wx2sVRDfPSGe"),
+        metadata=sp.utils.metadata_of_url("ipfs://QmZYTuiNKS14f5pvkS7hR1YmCutdcSvjcyPb1dBw62YHCF"),
         **kwargs
     ):
         # Use the storage and entrypoints of the FA2 lib

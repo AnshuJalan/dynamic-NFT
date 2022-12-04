@@ -37,7 +37,7 @@ class SVG(FA2_Lib):
             tvalue=Types.STATE,
         ),
         # IPFS link hosts the metadata at ./metadata/svg.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmPiE7wJCCKvUxTaEZCDUBnG6PJqYoqxkRDcsGqCpRmVxV"),
+        metadata=sp.utils.metadata_of_url("ipfs://QmYnmWznaFuAk8w9CVJRU3DG6tonVYthQfy8k2QpvwDeJ1"),
         **kwargs
     ):
         # Use the storage and entrypoints of the FA2 lib

@@ -46,7 +46,7 @@ class Game(FA2_Lib):
             tvalue=Types.PLAYER_STATE,
         ),
         # IPFS link hosts the metadata at ./metadata/game1.json
-        metadata=sp.utils.metadata_of_url("ipfs://QmP8oAmYqw2jFrwFzsyoT7hgwJRae8qL4NC4hfQQ1z2Y33"),
+        metadata=sp.utils.metadata_of_url("ipfs://QmYTWQ3qr5Ko6P9GhsMgPqT7miwHmj5TKJWYkyPngPxNpj"),
         **kwargs
     ):
         # Use the storage and entrypoints of the FA2 lib
